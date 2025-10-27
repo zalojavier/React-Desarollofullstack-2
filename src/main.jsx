@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { CartProvider } from './context/cartContex.jsx';
 
 // --- Estilos (importados globalmente) ---
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,7 +13,9 @@ import Home from './pages/Home.jsx';
 import BlogJuegosRetro from './pages/BlogJuegosRetro.jsx';
 import BlogArmarPc from './pages/BlogArmarPc.jsx';
 import Categorias from './pages/Categorias.jsx';
-import SeccionJuegosMesa from './pages/SeccionJuegosMesa.jsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA
+import SeccionJuegosMesa from './pages/SeccionJuegosMesa.jsx';
+import Carrito from './pages/Carrito.jsx';
+ // <-- 1. IMPORTA LA NUEVA PÁGINA
 
 // --- Definición de Rutas (El "Mapa" del sitio) ---
 const router = createBrowserRouter([
@@ -55,11 +58,19 @@ const router = createBrowserRouter([
     path: "/productos/carcassonne",
     element: <div>Página del Producto: Carcassonne (Próximamente)</div>,
   },
+
+  //4. Página del Carrito
+  {
+    path: "/carrito", element: <Carrito />,
+  },
 ]);
 
 // --- Carga de la App ---
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+    {/* El CartProvider envuelve TODO el sistema de rutas para que todas las páginas accedan al carrito */}
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
+  </React.StrictMode>,
+)

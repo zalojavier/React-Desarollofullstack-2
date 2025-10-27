@@ -26,7 +26,9 @@ function Home() {
 
       {/* */}
       <nav>
-        <button className="btn btn-add-cart w-100">🛒 Ver carrito</button>
+        <Link to="/carrito" className="btn btn-add-cart w-100">
+            🛒 Ver carrito
+          </Link>
       </nav>
 
       {/* */}
