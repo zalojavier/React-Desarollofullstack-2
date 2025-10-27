@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CartProvider } from './context/cartContex.jsx';
+import { seedUsers } from './api/userApi.ts';
 
 // --- Estilos (importados globalmente) ---
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -86,6 +87,8 @@ const router = createBrowserRouter([
     element: <ListaPedidos />,
   },
 ]);
+
+seedUsers();
 
 // --- Carga de la App ---
 ReactDOM.createRoot(document.getElementById('root')).render(

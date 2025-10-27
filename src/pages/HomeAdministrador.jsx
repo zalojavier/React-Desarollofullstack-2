@@ -1,6 +1,6 @@
 import React from 'react';
 import SideBarAdmin from '../components/SideBarAdmin'; // importa el componente
-import '../styles/style_administrador.css'; // importa los estilos (copiar el CSS al archivo indicado)
+import '../styles/HomeAdministrador.css'; // importa los estilos (copiar el CSS al archivo indicado)
 
 /**
  * Página principal del panel administrativo (visual).
