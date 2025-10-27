@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'; // 1. Importamos Link
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
-import './SeccionJuegosMesa.css'; // 2. Importamos el CSS nuevo
+import '../styles/SeccionJuegosMesa.css'; // 2. Importamos el CSS nuevo
 
 function SeccionJuegosMesa() {
   return (

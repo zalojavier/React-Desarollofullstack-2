@@ -1,0 +1,262 @@
+/* MANTENEMOS TU CSS ORIGINAL, SOLO REVISANDO EL SELECTOR PADRE */
+
+/* Fondo general y título */
+.carrito-root {
+  background: linear-gradient(135deg, #181c25 0%, #000000 100%);
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  margin: 0;
+  padding: 0 12px 40px 12px; /* padding lateral para que no toque los bordes en móviles */
+}
+
+.carrito-root h1.titulo-gamer {
+  text-shadow: 0 2px 10px #ffffff, 0 0 4px #03ffe2;
+  color: #fff;
+  margin-top: 28px;
+  text-align: center;
+  font-size: 2.2em;
+  letter-spacing: 1px;
+}
+
+/* Banner superior estilo gamer */
+.carrito-root .gamer-alert {
+  background: linear-gradient(90deg,#23293e 0%, #3242a8 100%);
+  color: #fff;
+  font-size: 1.15em;
+  border-radius: 12px;
+  padding: 14px 25px;
+  box-shadow: 0 4px 16px rgba(50,66,168,0.13);
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  border-left: 3px solid #03ffe2;
+  position: relative;
+  overflow: hidden;
+}
+
+.carrito-root .gamer-icon {
+  font-size: 1.7em;
+  margin-right: 14px;
+  color: #2108ad;
+  animation: gamerGlow 1.2s infinite alternate;
+}
+
+@keyframes gamerGlow {
+  from { text-shadow: 0 0 6px #03ffe2, 0 0 0px #fff; }
+  to   { text-shadow: 0 0 16px #03ffe2, 0 0 10px #fff; }
+}
+
+.carrito-root .gamer-link {
+  color: #03ffe2;
+  margin-left: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid #03ffe2;
+  transition: color 0.2s, border-bottom 0.2s, text-shadow 0.2s;
+}
+.carrito-root .gamer-link:hover {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+  text-shadow: 0 0 12px #240311;
+}
+
+/* Contenedor del carrito */
+.carrito-root #carrito {
+  background: #23293e;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(3,255,226,0.09);
+  padding: 18px 22px;
+  margin: 24px auto 16px auto;
+  max-width: 540px;
+  min-height: 80px;
+}
+
+/* Productos en el carrito */
+.carrito-root #carrito > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #222a50 60%, #03ffe2 100%);
+  margin-bottom: 14px;
+  border-radius: 10px;
+  padding: 12px 18px;
+  box-shadow: 0 2px 10px rgba(3,255,226,0.08);
+  border-left: 3px solid #03ffe2;
+  transition: box-shadow 0.18s;
+}
+
+.carrito-root #carrito > div:last-child {
+  margin-bottom: 0;
+}
+
+.carrito-root #carrito span {
+  color: #fff;
+  font-weight: 500;
+  font-size: 1em;
+  /* Eliminamos margin-right: 14px; para no afectar los spans internos */
+}
+
+/* Este selector no es necesario en React ya que usas divs internos */
+/* .carrito-root #carrito span:first-child { 
+  color: #03ffe2;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 18px;
+  text-shadow: 0 2px 10px #03ffe2, 0 0 2px #222a50;
+} */
+
+.carrito-root #carrito input[type="number"] {
+  width: 54px;
+  height: 32px;
+  font-size: 1em;
+  background: #222a50;
+  color: #03ffe2;
+  border: 2px solid #03ffe2;
+  border-radius: 6px;
+  padding-left: 8px;
+  box-shadow: 0 2px 7px rgba(3,255,226,0.10);
+  margin-right: 14px;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.carrito-root #carrito input[type="number"]:focus {
+  border: 2px solid #2108ad;
+  box-shadow: 0 2px 14px #03ffe2;
+}
+
+/* Botón eliminar producto */
+.carrito-root #carrito .btn-eliminar,
+.carrito-root #carrito button {
+  background-color: #2532a4;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 7px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.carrito-root #carrito .btn-eliminar:hover,
+.carrito-root #carrito button:hover {
+  background-color: #03ffe2;
+  color: #222a50;
+  transform: scale(1.07);
+}
+
+/* Botones generales del carrito */
+.carrito-root .carrito-controles {
+  display: flex;
+  gap: 12px;
+  margin: 0 auto 32px auto;
+  max-width: 540px;
+  justify-content: center;
+}
+
+.carrito-root .btn-add-cart {
+  background-color: #2532a4;
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  /* margin-right: 10px; */ /* Lo quitamos para que el gap lo controle */
+  box-shadow: 0 2px 6px rgba(11, 195, 75, 0.08);
+  cursor: pointer;
+}
+
+.carrito-root .btn-add-cart i {
+  margin-right: 7px;
+  font-size: 1.2em;
+}
+
+.carrito-root .btn-add-cart:hover,
+.carrito-root .btn-add-cart:focus {
+  background-color: #03ffe2;
+  color: #222a50;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 12px rgba(0,60,255,0.13);
+}
+
+.carrito-root .btn-login {
+  background-color: #222a50;
+  color: #fff;
+  font-weight: bold;
+  padding: 12px 28px;
+  border-radius: 8px;
+  border: none;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 2px 6px rgba(11, 195, 75, 0.08);
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.carrito-root .btn-login i {
+  margin-right: 7px;
+  font-size: 1.2em;
+}
+
+.carrito-root .btn-login:hover,
+.carrito-root .btn-login:focus {
+  background-color: #003cff;
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 12px rgba(0,60,255,0.13);
+}
+
+/* Mensaje de carrito vacío */
+.carrito-root #carrito p {
+  color: #03ffe2;
+  font-size: 1.12em;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* TOTAL DE LA COMPRA - DEBAJO DEL CARRITO */
+.carrito-root #total-compra {
+  display: block;
+  margin: 28px auto 0 auto;
+  text-align: center;
+  color: #03ffe2;
+  font-size: 1.7em;
+  font-family: 'Orbitron', 'Segoe UI', 'Arial', sans-serif;
+  font-weight: bold;
+  text-shadow: 0 0 12px #03ffe2, 0 2px 12px #222a50;
+  background: linear-gradient(90deg, #23293e 50%, #03ffe2 100%);
+  border-radius: 10px;
+  padding: 12px 0;
+  max-width: 540px;
+  box-shadow: 0 2px 12px rgba(3,255,226,0.13);
+  letter-spacing: 1.5px;
+}
+
+/* Responsive para móviles */
+@media (max-width: 700px) {
+  .carrito-root #carrito {
+    padding: 10px 4vw;
+    max-width: 98vw;
+  }
+  .carrito-root #carrito > div {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 8px;
+  }
+  .carrito-root #carrito button {
+    margin-top: 7px;
+    width: 100%;
+  }
+  .carrito-root .carrito-controles {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 98vw;
+  }
+  .carrito-root #total-compra {
+    font-size: 1.2em;
+    padding: 10px 0;
+    margin: 18px auto 0 auto;
+    max-width: 98vw;
+  }
+}
