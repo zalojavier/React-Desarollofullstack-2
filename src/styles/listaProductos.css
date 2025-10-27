@@ -1,0 +1,500 @@
+/* Estilos base (tu CSS original) + extensiones para tablero, modal y create dropdown */
+
+/* --- (mantén la parte inicial exactamente como ya la tienes) --- */
+body {
+  background: linear-gradient(135deg, #181c25 0%, #000000 100%);
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  color: #fff;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar-box {
+  width: 260px;
+  background: #23293e;
+  border-radius: 20px;
+  box-shadow: 8px 0 32px 0 #03ffe235, 0 0 0 4px #03ffe218;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 0 26px 0;
+  margin: 24px 0 24px 24px;
+  height: calc(100vh - 48px);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 38px;
+}
+
+.sidebar-logo img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #181c25;
+  margin-bottom: 9px;
+  filter: drop-shadow(0 2px 10px #03ffe2);
+  padding: 7px;
+}
+
+.brand-name {
+  color: #03ffe2;
+  font-size: 1.1em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 28px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.07em;
+  border-radius: 12px;
+  transition: background 0.15s, color 0.15s;
+  opacity: 0.92;
+  margin: 0 14px;
+}
+
+.menu-item.active,
+.menu-item:hover {
+  background: linear-gradient(90deg, #03ffe220 0%, #23293e 100%);
+  color: #03ffe2;
+  opacity: 1;
+}
+
+.menu-item.logout {
+  margin-top: auto;
+  color: #f55252;
+}
+
+.menu-item.logout:hover {
+  background: #330c0c;
+  color: #fff;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 300px;
+  padding: 46px 36px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.productos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.productos-header h1 {
+  font-size: 2.1rem;
+  color: #03ffe2;
+  text-shadow: 0 2px 10px #181c25, 0 0 4px #03ffe2;
+  margin: 0;
+}
+
+/* botón crear: mantuve tu diseño y le agregué iconos y foco */
+.btn-crear-producto {
+  background: #03ffe2;
+  color: #23293e;
+  font-weight: bold;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 18px;
+  font-size: 1.1em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px #03ffe288;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-crear-producto.ghost {
+  background: transparent;
+  color: #03ffe2;
+  border: 1px solid rgba(3,255,226,0.12);
+  box-shadow: none;
+}
+.btn-crear-producto:hover {
+  background: #00bfae;
+  color: #fff;
+  transform: scale(1.04);
+}
+
+/* area del dropdown del create */
+.create-wrapper {
+  position: relative;
+}
+.create-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #23293e;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  padding: 8px;
+  min-width: 200px;
+  z-index: 40;
+  border: 1px solid rgba(3,255,226,0.06);
+}
+.create-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.create-dropdown-item:hover {
+  background: linear-gradient(90deg, #03ffe220 0%, #23293e 100%);
+  color: #03ffe2;
+}
+
+/* view toggle buttons */
+.view-controls {
+  display: inline-flex;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(3,255,226,0.04);
+}
+.toggle-btn {
+  background: transparent;
+  color: #cfcfcf;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: background 0.15s, color 0.15s;
+}
+.toggle-btn.active {
+  background: linear-gradient(90deg, #03ffe220 0%, #23293e 100%);
+  color: #03ffe2;
+}
+
+/* tabla original (mantengo tus reglas) */
+.productos-table-wrapper {
+  background: #23293e;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0,60,255,0.12), 0 0 0 2px #03ffe212;
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.productos-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+  font-size: 1.04em;
+}
+
+.productos-table th, .productos-table td {
+  padding: 14px 10px;
+  text-align: left;
+  border-bottom: 1px solid #31385a;
+  vertical-align: middle;
+}
+
+.productos-table th {
+  background: #181c25;
+  color: #03ffe2;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.productos-table tr:last-child td {
+  border-bottom: none;
+}
+
+.producto-img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  background: #181c25;
+  border-radius: 10px;
+  border: 2px solid #03ffe2;
+  box-shadow: 0 2px 10px #03ffe255;
+}
+
+/* botones edición */
+.btn-editar-producto {
+  background: #222a50;
+  color: #03ffe2;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 13px;
+  font-size: 1em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px #03ffe288;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-editar-producto.small {
+  padding: 6px 9px;
+  font-size: 0.95em;
+}
+.btn-editar-producto.remove {
+  background: #3a1f1f;
+  color: #ffb6b6;
+}
+.btn-editar-producto:hover {
+  background: #03ffe2;
+  color: #23293e;
+  transform: scale(1.04);
+}
+
+/* ----------- NUEVAS REGLAS: TABLERO/CARDS ------------ */
+.product-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.product-card {
+  background: linear-gradient(180deg, #222a50 0%, #1b2342 100%);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45), 0 0 0 2px rgba(3,255,226,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 180px;
+  position: relative;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.55), 0 0 0 2px rgba(3,255,226,0.08);
+}
+
+.product-card-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+  background: #181c25;
+  border-radius: 8px;
+  border: 2px solid rgba(3,255,226,0.06);
+  overflow: hidden;
+}
+.product-card-media img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.product-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.product-card-title {
+  font-size: 1.02em;
+  margin: 0;
+  color: #fff;
+}
+.product-card-category {
+  color: #bdbdbd;
+  font-size: 0.95em;
+  margin: 0;
+}
+.product-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.product-price {
+  font-weight: 700;
+  color: #03ffe2;
+}
+.product-stock {
+  font-size: 0.9em;
+  color: #cfcfcf;
+}
+
+/* acciones dentro de la card */
+.product-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  justify-content: flex-end;
+}
+
+/* ------------ MODAL VISUAL ------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.modal-card {
+  width: 520px;
+  max-width: calc(100% - 28px);
+  background: linear-gradient(180deg,#23293e 0%, #1b1f34 100%);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(3,255,226,0.05);
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.modal-header h2 {
+  margin: 0;
+  color: #03ffe2;
+}
+.modal-close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.modal-body label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #d0d0d0;
+}
+.modal-body input {
+  padding: 8px 10px;
+  background: #181c25;
+  color: #fff;
+  border: 1px solid rgba(3,255,226,0.06);
+  border-radius: 6px;
+  outline: none;
+}
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* responsive tweaks */
+@media (max-width: 900px) {
+  .product-board {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+  .modal-card {
+    width: 92%;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    margin-left: 0;
+    padding-top: 70px;
+  }
+  .productos-header {
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .productos-table-wrapper {
+    padding: 6px;
+  }
+  .productos-table th, .productos-table td {
+    padding: 7px 4px;
+    font-size: 0.97em;
+  }
+
+  /* --- AÑADIDO: Panel que contiene la tabla/tablero --- */
+.panel-box {
+  background: linear-gradient(180deg, rgba(3,255,226,0.02) 0%, rgba(3,255,226,0.01) 100%);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 8px 36px rgba(0,0,0,0.5), 0 0 0 2px rgba(3,255,226,0.03);
+  border: 1px solid rgba(3,255,226,0.04);
+  margin-bottom: 28px;
+}
+
+/* Botón Crear usuario (personalizado) */
+.btn-crear-usuario {
+  background: linear-gradient(90deg, #2b2f6c 0%, #222a50 100%);
+  color: #fff;
+  border: 1px solid rgba(3,255,226,0.06);
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  transition: transform 0.12s, box-shadow 0.12s, background 0.12s;
+}
+.btn-crear-usuario i { font-size: 1.06em; color: #03ffe2; }
+.btn-crear-usuario:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  background: linear-gradient(90deg, #2e6b62 0%, #00bfae 100%);
+  color: #0a0a0a;
+}
+
+/* Ajustes menores para que el panel y los elementos respire dentro del main */
+.panel-box .productos-table-wrapper {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.panel-box .productos-table {
+  background: transparent;
+}
+
+/* Asegura buena separación entre header y panel */
+.productos-header { margin-bottom: 18px; }
+
+/* Mantengo el resto del CSS que ya tienes (tabla, tarjetas, modal, etc.). */
+}

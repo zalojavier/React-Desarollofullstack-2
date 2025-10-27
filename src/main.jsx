@@ -14,7 +14,11 @@ import BlogJuegosRetro from './pages/BlogJuegosRetro.jsx';
 import BlogArmarPc from './pages/BlogArmarPc.jsx';
 import Categorias from './pages/Categorias.jsx';
 import SeccionJuegosMesa from './pages/SeccionJuegosMesa.jsx';
-import Carrito from './pages/Carrito.jsx';
+import CartPage from './pages/Carrito.tsx';
+import HomeAdministrador from './pages/HomeAdministrador.jsx';
+import ListaProductos from './pages/ListaProductos.jsx';
+import ListaUsuarios from './pages/ListaUsuarios.jsx';
+import ListaPedidos from './pages/ListaPedidos.jsx';
  // <-- 1. IMPORTA LA NUEVA PÁGINA
 
 // --- Definición de Rutas (El "Mapa" del sitio) ---
@@ -61,7 +65,25 @@ const router = createBrowserRouter([
 
   //4. Página del Carrito
   {
-    path: "/carrito", element: <Carrito />,
+    path: "/carrito", element: <CartPage />,
+  },
+
+  // --- NUEVAS RUTAS DE ADMINISTRADOR --- 
+  {
+    path: "/administrador/home", 
+    element: <HomeAdministrador />, // <-- RUTA NUEVA
+  },
+  {
+    path: "/administrador/productos",
+    element: <ListaProductos />, // <-- RUTA NUEVA
+  },
+  {
+    path: "/administrador/usuarios",
+    element: <ListaUsuarios />, // <-- RUTA NUEVA
+  },
+  {
+    path: "/administrador/pedidos",
+    element: <ListaPedidos />,
   },
 ]);
 
