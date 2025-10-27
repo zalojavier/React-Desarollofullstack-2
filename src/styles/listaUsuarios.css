@@ -1,0 +1,311 @@
+/* Copia adaptada del CSS que proporcionaste para la página ListaUsuarios */
+
+/* base / layout */
+body {
+  background: linear-gradient(135deg, #181c25 0%, #000000 100%);
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  color: #fff;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* sidebar (reutiliza el mismo estilo que SideBarAdmin) */
+.sidebar-box {
+  width: 260px;
+  background: #23293e;
+  border-radius: 20px;
+  box-shadow: 8px 0 32px 0 #03ffe235, 0 0 0 4px #03ffe218;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 0 26px 0;
+  margin: 24px 0 24px 24px;
+  height: calc(100vh - 48px);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 38px;
+}
+
+.sidebar-logo img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #181c25;
+  margin-bottom: 9px;
+  filter: drop-shadow(0 2px 10px #03ffe2);
+  padding: 7px;
+}
+
+.brand-name {
+  color: #03ffe2;
+  font-size: 1.1em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 28px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.07em;
+  border-radius: 12px;
+  transition: background 0.15s, color 0.15s;
+  opacity: 0.92;
+  margin: 0 14px;
+}
+
+.menu-item.active,
+.menu-item:hover {
+  background: linear-gradient(90deg, #03ffe220 0%, #23293e 100%);
+  color: #03ffe2;
+  opacity: 1;
+}
+
+.menu-item.logout {
+  margin-top: auto;
+  color: #f55252;
+}
+
+.menu-item.logout:hover {
+  background: #330c0c;
+  color: #fff;
+}
+
+/* main content */
+.main-content {
+  flex: 1;
+  margin-left: 300px;
+  padding: 46px 36px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* header */
+.usuarios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.usuarios-header h1 {
+  font-size: 2.1rem;
+  color: #03ffe2;
+  text-shadow: 0 2px 10px #181c25, 0 0 4px #03ffe2;
+  margin: 0;
+}
+
+/* crear usuario button */
+.btn-crear-usuario {
+  background: #03ffe2;
+  color: #23293e;
+  font-weight: bold;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 18px;
+  font-size: 1.1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  box-shadow: 0 2px 8px #03ffe288;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn-crear-usuario:hover {
+  background: #00bfae;
+  color: #fff;
+  transform: scale(1.04);
+}
+
+/* table wrapper and table */
+.usuarios-table-wrapper {
+  background: #23293e;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0,60,255,0.12), 0 0 0 2px #03ffe212;
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.usuarios-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+  font-size: 1.04em;
+}
+
+.usuarios-table th, .usuarios-table td {
+  padding: 14px 10px;
+  text-align: left;
+  border-bottom: 1px solid #31385a;
+  vertical-align: middle;
+}
+
+.usuarios-table th {
+  background: #181c25;
+  color: #03ffe2;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.usuarios-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* avatar */
+.usuario-avatar {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  background: #181c25;
+  border-radius: 50%;
+  border: 2px solid #03ffe2;
+  box-shadow: 0 2px 10px #03ffe255;
+}
+
+/* estado pill */
+.estado {
+  font-weight: 600;
+  border-radius: 9px;
+  padding: 4px 12px;
+  font-size: 0.98em;
+  display: inline-block;
+}
+.estado.activo {
+  background: #03ffe220;
+  color: #00bfae;
+}
+.estado.inactivo {
+  background: #f5525220;
+  color: #f55252;
+}
+
+/* edit button */
+.btn-editar-usuario {
+  background: #222a50;
+  color: #03ffe2;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 13px;
+  font-size: 1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 8px #03ffe288;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn-editar-usuario:hover {
+  background: #03ffe2;
+  color: #23293e;
+  transform: scale(1.04);
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .sidebar-box {
+    width: 64px;
+    min-width: 64px;
+    padding: 16px 0;
+    align-items: center;
+    margin: 14px 0 14px 10px;
+    border-radius: 14px;
+  }
+  .sidebar-logo span {
+    display: none;
+  }
+  .sidebar-logo img {
+    width: 48px;
+    height: 48px;
+  }
+  .menu-item {
+    padding: 12px 8px;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1.2em;
+  }
+  .menu-item span {
+    display: none;
+  }
+  .main-content {
+    margin-left: 80px;
+    padding: 34px 10px 18px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+  .sidebar-box {
+    flex-direction: row;
+    width: 100vw;
+    min-width: 0;
+    height: 56px;
+    padding: 0;
+    box-shadow: 0 2px 16px #03ffe22a;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0 0 18px 18px;
+    margin: 0;
+  }
+  .sidebar-logo {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0;
+    margin-left: 8px;
+  }
+  .sidebar-logo img {
+    width: 32px;
+    height: 32px;
+    padding: 2px;
+    margin-bottom: 0;
+  }
+  .main-content {
+    margin-left: 0;
+    padding-top: 70px;
+  }
+  .usuarios-header {
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .usuarios-table-wrapper {
+    padding: 6px;
+  }
+  .usuarios-table th, .usuarios-table td {
+    padding: 7px 4px;
+    font-size: 0.97em;
+  }
+}

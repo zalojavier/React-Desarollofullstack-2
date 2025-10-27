@@ -85,7 +85,7 @@ export function CartPage() {
         <button className="btn-add-cart" type="button" onClick={clearCart}>
           <i className="fas fa-trash-alt" /> Vaciar carrito
         </button>
-        <a href="/" className="btn-login"><i className="fas fa-arrow-left" /> Seguir comprando</a>
+        <a href="/administrador/home" className="btn-login"><i className="fas fa-arrow-left" /> Seguir comprando</a>
         <button 
             id="btn-pagar" 
             className="btn-add-cart" 
