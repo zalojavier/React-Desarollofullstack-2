@@ -1,0 +1,166 @@
+
+* {
+    /* NOTA: Este ' * ' es muy agresivo, pero lo respetaremos 
+       para que se vea igual que tu original */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* NOTA 2: Este 'body' solo afectará a esta página 
+    porque importaremos este CSS localmente.
+  */
+  body {
+    background-color: #0a0a1a;
+    color: #e0e0ff;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  header {
+    background: linear-gradient(135deg, #2a0a5e 0%, #0a0a1a 100%);
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 2px solid #ff00ee;
+    margin-bottom: 30px;
+    border-radius: 10px;
+  }
+  
+  .logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 10px #7700ff, 0 0 20px #7700ff;
+    margin-bottom: 10px;
+  }
+  
+  .tagline {
+    font-size: 1.2rem;
+    color: #aaccff;
+    margin-bottom: 20px;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 40px 0;
+    background: rgba(20, 20, 50, 0.7);
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    color: #00eeff;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px #0077ff;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #ccccff;
+  }
+  
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+  }
+  
+  .game-card {
+    background: linear-gradient(145deg, #1a1a3a, #0f0f2a);
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #3344aa;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(100, 100, 255, 0.3);
+  }
+  
+  .game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #ff00aa, #7700ff);
+  }
+  
+  .game-number {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #7700ff;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 2;
+  }
+  
+  .game-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 2px solid #4455aa;
+  }
+  
+  .game-title {
+    font-size: 1.5rem;
+    color: #00ccff;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #3344aa;
+    padding-bottom: 10px;
+  }
+  
+  .game-year {
+    color: #ff00aa;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .game-description {
+    color: #ccccff;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    border-top: 1px solid #3344aa;
+    color: #aaccff;
+  }
+  
+  @media (max-width: 768px) {
+    .games-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero h1 {
+      font-size: 2rem;
+    }
+  }

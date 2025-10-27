@@ -1,0 +1,110 @@
+/* Estilos específicos para la sección de Juegos de Mesa */
+body {
+    background: linear-gradient(120deg, #222a50 60%, #03ffe2 100%);
+    font-family: 'Montserrat', Arial, sans-serif;
+    min-height: 100vh;
+  }
+  
+  .container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .titulo-seccion {
+    color: #03ffe2;
+    text-align: center;
+    font-weight: 900;
+    text-shadow: 0 0 15px #03ffe2;
+    margin-bottom: 30px;
+  }
+  
+  .card {
+    background-color: #1b1f3a;
+    border: 2px solid #03ffe2;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(3, 255, 226, 0.2);
+    transition: transform 0.2s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(3, 255, 226, 0.4);
+  }
+  
+  .card img {
+    border-radius: 12px;
+    padding: 10px;
+    background: #fff;
+    height: 230px;
+    object-fit: contain;
+  }
+  
+  .card-title {
+    color: #03ffe2;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  .precio {
+    color: #03ffe2;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .precio-tachado {
+    color: #aaa;
+    text-decoration: line-through;
+    font-size: 1rem;
+    margin-left: 10px;
+  }
+  
+  .btn-comprar {
+    background-color: #03ffe2;
+    color: #222a50;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-comprar:hover {
+    background-color: #222a50;
+    color: #03ffe2;
+  }
+  
+  .btn-vermas {
+    background-color: transparent;
+    color: #03ffe2;
+    border: 1px solid #03ffe2;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-vermas:hover {
+    background-color: #03ffe2;
+    color: #222a50;
+  }
+  
+  .catalogo-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #03ffe2;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .catalogo-link:hover {
+    color: #fff;
+    text-shadow: 0 0 10px #03ffe2;
+  }

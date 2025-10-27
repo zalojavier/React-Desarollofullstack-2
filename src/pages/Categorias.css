@@ -1,0 +1,81 @@
+/* Estilos específicos para la página de Categorías */
+body {
+    background: linear-gradient(120deg, #0d1117 40%, #03ffe2 100%);
+    min-height: 100vh;
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #fff;
+  }
+  
+  .catalogo-container {
+    background: rgba(17, 23, 42, 0.9);
+    box-shadow: 0 8px 25px rgba(3, 255, 226, 0.3);
+    border: 2px solid #03ffe2;
+    border-radius: 18px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 2rem 1rem 1.5rem 1rem;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 1.2s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .catalogo-title {
+    color: #03ffe2;
+    text-shadow: 0 2px 20px #03ffe2, 0 0 15px #1b1f3a;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 2.5rem;
+  }
+  
+  .list-group-item {
+    background: #1b1f3a;
+    color: #fff;
+    border: none;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    box-shadow: 0 3px 10px rgba(3, 255, 226, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Cambiamos 'a' por 'Link' de React Router, pero el estilo se aplica igual */
+  .list-group-item a {
+    display: block;
+    padding: 12px;
+    color: #03ffe2;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+  
+  .list-group-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(3, 255, 226, 0.4);
+    background: #03ffe2;
+  }
+  
+  .list-group-item:hover a {
+    color: #0d1117;
+    text-shadow: 0 0 8px #fff;
+  }
+  
+  @media (max-width: 768px) {
+    .catalogo-title {
+      font-size: 1.7rem;
+    }
+    .list-group-item {
+      font-size: 1rem;
+    }
+  }
