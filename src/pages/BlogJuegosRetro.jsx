@@ -68,7 +68,7 @@ function BlogJuegosRetro() {
         {/* El <footer> simple de esta página lo podemos dejar si quieres,
             o puedes borrarlo si prefieres que solo esté el Footer principal */}
         <footer>
-          <p>© 2023 GameLegend - Todos los derechos reservados</p>
+          <p>© 2025 Mi tienda Pc gamer - Todos los derechos reservados</p>
           <p>Estos cinco pilares no son solo juegos; son la herencia que todo jugador debe conocer.</p>
         </footer>
       </div>

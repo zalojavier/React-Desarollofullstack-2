@@ -69,7 +69,7 @@ function BlogArmarPc() {
         
         {/* Dejamos este footer local que es parte del diseño de la página de blog */}
         <footer>
-          <p>© 2023 GameLegend - Todos los derechos reservados</p>
+          <p>© 2025 Mi tienda Pc gamer - Todos los derechos reservados</p>
           <p>Consejos expertos para armar el PC gamer perfecto para tus necesidades.</p>
         </footer>
       </div>

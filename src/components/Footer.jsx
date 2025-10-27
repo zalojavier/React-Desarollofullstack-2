@@ -7,7 +7,10 @@ function Footer() {
               <h5 className="text-uppercase text-info">Sobre Nosotros</h5>
               {/* Usamos la clase de styles.css */}
               <p className="text-light footer-about-text">
-                En <strong>Mi Tienda PC Gamer</strong>, compartimos tu pasión...
+                En <strong>Mi Tienda PC Gamer</strong>, compartimos tu pasión...En <strong>Mi Tienda PC Gamer</strong>, compartimos tu pasión por la tecnología y el mundo gamer. 
+          Nuestra visión es ser líderes en la venta de <strong>computadoras de alto rendimiento</strong>, 
+          accesorios gamer y componentes de última generación, brindando siempre calidad, confianza 
+          y el mejor servicio. ¡Queremos llevar tu experiencia gaming al siguiente nivel! 🎮⚡
                 {/* (puedes copiar el resto del texto de tu HTML) */}
               </p>
             </div>
