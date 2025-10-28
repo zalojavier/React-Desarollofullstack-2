@@ -19,7 +19,7 @@ import Home from './pages/Home.jsx';
 import BlogJuegosRetro from './pages/BlogJuegosRetro.jsx';
 import BlogArmarPc from './pages/BlogArmarPc.jsx';
 import Categorias from './pages/Categorias.jsx';
-import SeccionJuegosMesa from './pages/SeccionJuegosMesa.jsx';
+import CategorySection from './pages/SeccionProductos.tsx';
 import CartPage from './pages/Carrito.tsx';
 import HomeAdministrador from './pages/HomeAdministrador';
 import ListaProductos from './pages/ListaProductos';
@@ -28,7 +28,8 @@ import ListaPedidos from './pages/ListaPedidos';
 import CrearUsuario from './pages/CrearUsuario'; // Verifica la extensión (.jsx o .tsx)
 import Login from './pages/Login.tsx';
 import CrearProducto from './pages/CrearProducto.tsx';
-import Signup from './pages/Signup.tsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
+import Signup from './pages/Signup.tsx';
+import ProductDetailPage from './pages/ProductDetailPage.tsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
 
 // --- Definición de Rutas (El "Mapa" del sitio) ---
 const router = createBrowserRouter([
@@ -45,17 +46,14 @@ const router = createBrowserRouter([
   { path: "/categorias", element: <Categorias /> },
 
   // --- NUEVAS RUTAS DE SECCIONES ---
-  {
-    path: "/secciones/juegosdemesa",
-    element: <SeccionJuegosMesa />,
-  },
-  { path: "/secciones/accesorios", element: <div>Página de Accesorios (Próximamente)</div> },
-  { path: "/secciones/consolas", element: <div>Página de Consolas (Próximamente)</div> },
-  { path: "/secciones/pcdeescritorio", element: <div>Página de PCs de Escritorio (Próximamente)</div> },
-  { path: "/secciones/sillasgamers", element: <div>Página de Sillas Gamers (Próximamente)</div> },
-  { path: "/secciones/mousepad", element: <div>Página de Mousepads (Próximamente)</div> },
-  { path: "/secciones/poleraspersonalizadas", element: <div>Página de Poleras (Próximamente)</div> },
-
+{ path:"/secciones/juegosdemesa", element: <CategorySection />}, // 🔑 Antes era SeccionJuegosMesa
+{ path: "/secciones/accesorios", element: <CategorySection /> }, // 🔑 Usa el mismo componente
+{ path: "/secciones/consolas", element: <CategorySection /> }, // 🔑 Usa el mismo componente
+{ path: "/secciones/pcdeescritorio", element: <CategorySection /> }, // 🔑 Usa el mismo componente
+{ path: "/secciones/sillasgamers", element: <CategorySection /> }, // 🔑 Usa el mismo componente
+{ path: "/secciones/mousepad", element: <CategorySection /> }, // 🔑 Usa el mismo componente
+{ path: "/secciones/poleraspersonalizadas", element: <CategorySection /> }, // 🔑 Usa el mismo componente
+{ path: "/productos/:id", element: <ProductDetailPage /> },
   // --- Páginas de Productos (Próximamente) ---
   { path: "/productos/audifonos", element: <div>Página de Audífonos (Próximamente)</div> },
   { path: "/productos/pc-gamer-elite", element: <div>Página de PC Gamer Elite (Próximamente)</div> },
