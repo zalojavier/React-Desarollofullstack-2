@@ -25,7 +25,10 @@ import HomeAdministrador from './pages/HomeAdministrador.jsx';
 import ListaProductos from './pages/ListaProductos.jsx';
 import ListaUsuarios from './pages/ListaUsuarios.jsx';
 import ListaPedidos from './pages/ListaPedidos.jsx';
- // <-- 1. IMPORTA LA NUEVA PÁGINA
+import CrearUsuario from './pages/CrearUsuario'; // Verifica la extensión (.jsx o .tsx)
+import Login from './pages/Login.jsx';
+import CrearProducto from './pages/CrearProducto.jsx';
+import Signup from './pages/Signup.jsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
 
 // --- Definición de Rutas (El "Mapa" del sitio) ---
 const router = createBrowserRouter([
@@ -33,7 +36,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
   },
-  
+
   // --- Páginas de Blog ---
   { path: "/blog/juegos-retro", element: <BlogJuegosRetro /> },
   { path: "/blog/armar-pc", element: <BlogArmarPc /> },
@@ -44,7 +47,7 @@ const router = createBrowserRouter([
   // --- NUEVAS RUTAS DE SECCIONES ---
   {
     path: "/secciones/juegosdemesa",
-    element: <SeccionJuegosMesa />, // <-- 2. ACTUALIZA ESTA LÍNEA
+    element: <SeccionJuegosMesa />,
   },
   { path: "/secciones/accesorios", element: <div>Página de Accesorios (Próximamente)</div> },
   { path: "/secciones/consolas", element: <div>Página de Consolas (Próximamente)</div> },
@@ -52,44 +55,47 @@ const router = createBrowserRouter([
   { path: "/secciones/sillasgamers", element: <div>Página de Sillas Gamers (Próximamente)</div> },
   { path: "/secciones/mousepad", element: <div>Página de Mousepads (Próximamente)</div> },
   { path: "/secciones/poleraspersonalizadas", element: <div>Página de Poleras (Próximamente)</div> },
-  
+
   // --- Páginas de Productos (Próximamente) ---
   { path: "/productos/audifonos", element: <div>Página de Audífonos (Próximamente)</div> },
   { path: "/productos/pc-gamer-elite", element: <div>Página de PC Gamer Elite (Próximamente)</div> },
   { path: "/productos/control-xbox", element: <div>Página de Control Xbox (Próximamente)</div> },
   { path: "/productos/mouse-logitech", element: <div>Página de Mouse Logitech (Próximamente)</div> },
-  
-  // 3. AÑADIMOS LAS NUEVAS PÁGINAS DE PRODUCTOS
-  {
-    path: "/productos/catan",
-    element: <div>Página del Producto: Catan (Próximamente)</div>,
-  },
-  {
-    path: "/productos/carcassonne",
-    element: <div>Página del Producto: Carcassonne (Próximamente)</div>,
-  },
+  { path: "/productos/catan", element: <div>Página del Producto: Catan (Próximamente)</div> },
+  { path: "/productos/carcassonne", element: <div>Página del Producto: Carcassonne (Próximamente)</div> },
 
   //4. Página del Carrito
   {
     path: "/carrito", element: <CartPage />,
   },
 
-  // --- NUEVAS RUTAS DE ADMINISTRADOR --- 
+  // --- NUEVAS RUTAS DE ADMINISTRADOR ---
+  { path: "/administrador/home", element: <HomeAdministrador /> },
+  { path: "/administrador/productos", element: <ListaProductos /> },
+  { path: "/administrador/usuarios", element: <ListaUsuarios /> },
+  { path: "/administrador/pedidos", element: <ListaPedidos /> },
   {
-    path: "/administrador/home", 
-    element: <HomeAdministrador />, // <-- RUTA NUEVA
+    path: "/administrador/crear-producto",
+    element: <CrearProducto />,
   },
   {
-    path: "/administrador/productos",
-    element: <ListaProductos />, // <-- RUTA NUEVA
+    path: "/administrador/crear_usuario",
+    element: <CrearUsuario />,
+  },
+
+
+  // --- 5. AÑADIMOS LAS NUEVAS RUTAS DE AUTENTICACIÓN ---
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
-    path: "/administrador/usuarios",
-    element: <ListaUsuarios />, // <-- RUTA NUEVA
+    path: "/registrarse",
+    element: <Signup />, // <-- 2. ACTUALIZA ESTA RUTA (NUEVO)
   },
   {
-    path: "/administrador/pedidos",
-    element: <ListaPedidos />,
+    path: "/restablecer-password",
+    element: <div>Página de Restablecer Contraseña (Próximamente)</div>,
   },
 ]);
 
