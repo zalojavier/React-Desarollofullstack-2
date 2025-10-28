@@ -26,7 +26,7 @@ import ListaProductos from './pages/ListaProductos';
 import ListaUsuarios from './pages/ListaUsuarios';
 import ListaPedidos from './pages/ListaPedidos';
 import CrearUsuario from './pages/CrearUsuario'; // Verifica la extensión (.jsx o .tsx)
-import Login from './pages/Login.jsx';
+import Login from './pages/Login.tsx';
 import CrearProducto from './pages/CrearProducto.tsx';
 import Signup from './pages/Signup.tsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
 
