@@ -1,0 +1,34 @@
+/* src/styles/ProductDetailPage.css */
+
+.product-detail-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Asegura que la imagen se adapte bien y mantenga su proporción sin ser demasiado grande */
+.product-image {
+    max-height: 500px;
+    object-fit: contain;
+    width: 100%;
+    border: 1px solid #eee; /* Borde sutil */
+}
+
+.product-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para el breadcrumb */
+.breadcrumb-item a {
+    color: var(--bs-primary); /* Usa el color primario de Bootstrap */
+    text-decoration: none;
+}
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+
+/* Ajuste de cantidad */
+.cart-controls .form-control {
+    text-align: center;
+}
