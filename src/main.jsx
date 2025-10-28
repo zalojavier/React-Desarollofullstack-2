@@ -25,7 +25,7 @@ import HomeAdministrador from './pages/HomeAdministrador.jsx';
 import ListaProductos from './pages/ListaProductos.jsx';
 import ListaUsuarios from './pages/ListaUsuarios.jsx';
 import ListaPedidos from './pages/ListaPedidos.jsx';
- // <-- 1. IMPORTA LA NUEVA PÁGINA
+import Login from './pages/Login.jsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
 
 // --- Definición de Rutas (El "Mapa" del sitio) ---
 const router = createBrowserRouter([
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
   // --- NUEVAS RUTAS DE SECCIONES ---
   {
     path: "/secciones/juegosdemesa",
-    element: <SeccionJuegosMesa />, // <-- 2. ACTUALIZA ESTA LÍNEA
+    element: <SeccionJuegosMesa />,
   },
   { path: "/secciones/accesorios", element: <div>Página de Accesorios (Próximamente)</div> },
   { path: "/secciones/consolas", element: <div>Página de Consolas (Próximamente)</div> },
@@ -58,16 +58,8 @@ const router = createBrowserRouter([
   { path: "/productos/pc-gamer-elite", element: <div>Página de PC Gamer Elite (Próximamente)</div> },
   { path: "/productos/control-xbox", element: <div>Página de Control Xbox (Próximamente)</div> },
   { path: "/productos/mouse-logitech", element: <div>Página de Mouse Logitech (Próximamente)</div> },
-  
-  // 3. AÑADIMOS LAS NUEVAS PÁGINAS DE PRODUCTOS
-  {
-    path: "/productos/catan",
-    element: <div>Página del Producto: Catan (Próximamente)</div>,
-  },
-  {
-    path: "/productos/carcassonne",
-    element: <div>Página del Producto: Carcassonne (Próximamente)</div>,
-  },
+  { path: "/productos/catan", element: <div>Página del Producto: Catan (Próximamente)</div> },
+  { path: "/productos/carcassonne", element: <div>Página del Producto: Carcassonne (Próximamente)</div> },
 
   //4. Página del Carrito
   {
@@ -75,21 +67,23 @@ const router = createBrowserRouter([
   },
 
   // --- NUEVAS RUTAS DE ADMINISTRADOR --- 
+  { path: "/administrador/home", element: <HomeAdministrador /> },
+  { path: "/administrador/productos", element: <ListaProductos /> },
+  { path: "/administrador/usuarios", element: <ListaUsuarios /> },
+  { path: "/administrador/pedidos", element: <ListaPedidos /> },
+
+  // --- 5. AÑADIMOS LAS NUEVAS RUTAS DE AUTENTICACIÓN (NUEVO) ---
   {
-    path: "/administrador/home", 
-    element: <HomeAdministrador />, // <-- RUTA NUEVA
+    path: "/login",
+    element: <Login />,
   },
   {
-    path: "/administrador/productos",
-    element: <ListaProductos />, // <-- RUTA NUEVA
+    path: "/registrarse",
+    element: <div>Página de Registro (Próximamente)</div>,
   },
   {
-    path: "/administrador/usuarios",
-    element: <ListaUsuarios />, // <-- RUTA NUEVA
-  },
-  {
-    path: "/administrador/pedidos",
-    element: <ListaPedidos />,
+    path: "/restablecer-password",
+    element: <div>Página de Restablecer Contraseña (Próximamente)</div>,
   },
 ]);
 
