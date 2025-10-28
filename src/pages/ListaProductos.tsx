@@ -69,27 +69,17 @@ export default function ListaProductos() {
                     </div>
 
                     <div className="create-area" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                        {/* Enlace para crear usuario */}
-                        <Link
-                          className="btn-crear-usuario"
-                          to="/administrador/crear_usuario" 
-                          title="Crear nuevo usuario"
-                        >
-                            <i className="bi bi-person-plus" /> Crear usuario
-                        </Link>
+                    
 
                         {/* Botón crear producto con dropdown */}
                         <div className="create-wrapper">
-                            <button
+                            <Link
                                 className="btn-crear-producto"
-                                type="button"
-                                onClick={() => setDropdownOpen(!dropdownOpen)}
-                                aria-haspopup="true"
-                                aria-expanded={dropdownOpen}
-                            >
-                                <i className="bi bi-plus-circle" /> Crear producto
-                                <i className={`bi ${dropdownOpen ? 'bi-caret-up-fill' : 'bi-caret-down-fill'}`} style={{ marginLeft: 6 }} />
-                            </button>
+                                to="/administrador/crear_producto" 
+                                title="Crear nuevo producto"
+                                >
+                                    <i className="bi bi-person-plus" /> Crear Producto
+                            </Link>
 
                             {dropdownOpen && (
                                 <div className="create-dropdown" role="menu">
