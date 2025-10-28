@@ -25,6 +25,7 @@ import HomeAdministrador from './pages/HomeAdministrador.jsx';
 import ListaProductos from './pages/ListaProductos.jsx';
 import ListaUsuarios from './pages/ListaUsuarios.jsx';
 import ListaPedidos from './pages/ListaPedidos.jsx';
+import CrearUsuario from './pages/CrearUsuario';
  // <-- 1. IMPORTA LA NUEVA PÁGINA
 
 // --- Definición de Rutas (El "Mapa" del sitio) ---
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
   {
     path: "/administrador/pedidos",
     element: <ListaPedidos />,
+  },
+  {
+    path: "/administrador/crear_usuario",
+    element: <CrearUsuario />,
   },
 ]);
 
