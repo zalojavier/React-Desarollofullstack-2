@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SideBarAdmin from '../components/SideBarAdmin';
 import '../styles/listaUsuarios.css';
-// Importamos las funciones y tipos de la API
 import { loadAndSeedUsers } from '../api/userApi'; 
 import type { User } from '../types/UserTypes'; 
 
-/**
- * Página de lista de usuarios, cargando datos desde localStorage a través de userApi.
- */
+
 export default function ListaUsuarios() {
     
-    // 1. ESTADO: Usaremos esta variable para guardar los usuarios cargados
     const [users, setUsers] = useState<User[]>([]); 
 
-    // 2. EFECTO: Cargamos los usuarios al montar el componente
+
     useEffect(() => {
-        // Esta función lee de localStorage o inicializa los usuarios por defecto
+
         const storedUsers: User[] = loadAndSeedUsers();
         
         // Asignamos la lista cargada al estado
@@ -25,7 +21,6 @@ export default function ListaUsuarios() {
 
     // Helper para determinar el estado visual
     const getUserStatus = (user: User): 'activo' | 'inactivo' => {
-        // Determinación basada en la presencia de datos críticos
         if (user.rut && user.correo && user.rol) {
             return 'activo';
         }
@@ -64,7 +59,7 @@ export default function ListaUsuarios() {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* 3. ITERACIÓN: Usamos el estado 'users' cargado de la API */}
+                            {}
                             {users.map(user => {
                                 const status = getUserStatus(user); 
                                 return (

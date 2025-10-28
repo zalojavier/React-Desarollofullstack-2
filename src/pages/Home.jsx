@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar.jsx'; // Importamos el Navbar
-import Footer from '../components/Footer.jsx'; // Importamos el Footer
-
+import Navbar from '../components/Navbar.jsx'; 
+import Footer from '../components/Footer.jsx'; 
 function Home() {
   
-  // Todo el contenido de la página va DENTRO del 'return'
   return (
     <>
       <Navbar /> {/* <-- Componente Navbar */}
@@ -196,8 +194,8 @@ function Home() {
       
       <Footer /> {/* <-- Componente Footer */}
       
-    </> // <-- Cierra el fragment
-  ); // <-- Cierra el return
-} // <-- Cierra la función Home
+    </> 
+  ); 
+} 
 
 export default Home;

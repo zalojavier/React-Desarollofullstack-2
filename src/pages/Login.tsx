@@ -39,7 +39,6 @@ export default function Login() {
 
         const users: User[] = loadAndSeedUsers(); 
 
-        // Buscar al usuario por correo y contraseña
         const foundUser = users.find(user => 
             user.correo.toLowerCase() === credentials.correo.toLowerCase() &&
             user.contrasena === credentials.contrasena
@@ -48,7 +47,7 @@ export default function Login() {
         if (foundUser) {
             setMensaje(`¡Bienvenido, ${foundUser.nombre}!`);
             
-            // 🔑 REDIRECCIÓN BASADA EN EL ROL
+ 
             setTimeout(() => {
                 if (foundUser.rol === 'Administrador') {
                     navigate('/administrador/home'); 

@@ -4,45 +4,42 @@ import '../styles/Signup.css';
 import { createUser } from '../api/userApi';
 import type { UserForm } from '../types/UserTypes';
 
-// Tipos de elementos que pueden cambiar
+
 type InputElement = HTMLInputElement | HTMLSelectElement;
 
-// Interfaz que incluye los campos del formulario, MÁS LA REGIÓN (Comuna eliminada)
 interface SignupFormState {
-    // UserForm required fields (initialized or derived)
+   
     nombre: string;
     correo: string;
     rut: string;
     contrasena: string;
     rol: 'Cliente' | 'Administrador';
 
-    // Signup form specific fields
     nombreCompleto: string;
     confirmCorreo: string;
     confirmContrasena: string;
     telefono: string;
-    region: string; // La región se mantiene
+    region: string; 
 }
 
 export default function Signup() {
     const navigate = useNavigate();
     
-    // 1. ESTADO: La comuna se elimina del estado inicial
     const [formData, setFormData] = useState<SignupFormState>({
-        // UserForm required fields
+        
         nombre: '', 
         correo: '',
         rut: '00.000.000-0',
         contrasena: '',
         rol: 'Cliente',
         
-        // Signup form specific fields
+       
         nombreCompleto: '', 
         confirmCorreo: '',
         confirmContrasena: '',
         telefono: '',
         region: '',
-        // ❌ COMUNA ELIMINADA DE AQUÍ
+        
     });
     const [mensaje, setMensaje] = useState('');
     const [esError, setEsError] = useState(false);

@@ -1,11 +1,9 @@
-// contents of file
 import React, { useEffect, useState } from 'react';
 import SideBarAdmin from '../components/SideBarAdmin.jsx';
 import '../styles/HomeAdministrador.css';
 
-// RESTAURADO: Importamos las funciones de productos (seedProducts y getProductCount).
 import {getProductCount } from '../api/productApi';
-import { getUserCount } from '../api/userApi'; // Este es el único módulo API activo.
+import { getUserCount } from '../api/userApi'; 
 
 function HomeAdministrador() {
   const [productCount, setProductCount] = useState<number>(0);
@@ -15,10 +13,8 @@ function HomeAdministrador() {
   
 
     try {
-      // RESTAURADO: Carga de conteos de Productos.
       setProductCount(typeof getProductCount === 'function' ? getProductCount() : 0);
 
-      // Mantenemos la carga de Usuarios.
       setUserCount(typeof getUserCount === 'function' ? getUserCount() : 0);
       
     } catch (error) {

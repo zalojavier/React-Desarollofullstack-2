@@ -5,9 +5,8 @@ import Footer from '../components/Footer.jsx';
 import { useCart } from '../context/cartContex'; 
 import { getAllProducts } from '../api/productApi'; 
 import type { Product } from '../types/ProductTypes';
-import '../styles/SeccionJuegosMesa.css'; // Usamos el CSS existente
+import '../styles/SeccionJuegosMesa.css';
 
-// 1. Mapeo de Slugs de URL a Nombres de Categoría (DEBE COINCIDIR con Product.category en la API)
 const CATEGORY_MAP: { [key: string]: { name: string, icon: string } } = {
     '/secciones/juegosdemesa': { name: 'Juegos de mesa', icon: 'bi-controller' },
     '/secciones/accesorios': { name: 'Accesorios', icon: 'bi-headset' },
@@ -37,12 +36,10 @@ export default function CategorySection() {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Determinamos la categoría a mostrar basada en la URL
     const categoryInfo = CATEGORY_MAP[pathname];
     const categoryName = categoryInfo ? categoryInfo.name : 'Productos';
     const categoryIcon = categoryInfo ? categoryInfo.icon : 'bi-tags';
 
-    // Efecto para cargar TODOS los productos una sola vez
     useEffect(() => {
         const storedProducts = getAllProducts();
         setProducts(storedProducts);
@@ -73,8 +70,8 @@ export default function CategorySection() {
         addItem({
             id: String(product.id),
             nombre: product.name,
-            precioUnitario: priceAsNumber, // Usamos el nombre de propiedad corregido
-            cantidad: 1, // Siempre se añade 1 desde la vista de categoría
+            precioUnitario: priceAsNumber,
+            cantidad: 1, 
         });
     };
 

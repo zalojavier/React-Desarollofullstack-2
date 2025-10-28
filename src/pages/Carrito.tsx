@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/cartContex';
 import '../styles/carrito.css';
-import { updateProductStock } from '../api/productApi'; // Importamos la función de descuento
+import { updateProductStock } from '../api/productApi'; 
 
-/**
- * Componente CarritoPage (Contenedor Funcional)
- * * 🔑 CORRECCIÓN CLAVE: Usamos 'export default function' para proveer la exportación por defecto
- */
+
 export default function CartPage() { 
     const { items, total, updateQuantity, removeItem, clearCart } = useCart();
     const [compraExitosa, setCompraExitosa] = useState(false);

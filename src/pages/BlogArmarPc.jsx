@@ -20,7 +20,7 @@ function BlogArmarPc() {
           {/* */}
           <div className="tip-card">
             <div className="tip-number">1</div>
-            {/* 4. Recuerda cerrar todas las <img> con "/>" */}
+            {}
             <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Presupuesto para PC Gamer" className="tip-image" />
             <h2 className="tip-title">Define tu presupuesto</h2>
             <p className="tip-description">Establece un presupuesto realista antes de comenzar. Esto te ayudará a tomar decisiones sobre qué componentes priorizar y evitará gastos innecesarios.</p>

@@ -5,9 +5,7 @@ import '../styles/listaProductos.css';
 import { getAllProducts } from '../api/productApi';
 import type { Product } from '../types/ProductTypes'; 
 
-/**
- * ListaProductos - Muestra los productos cargados desde localStorage.
- */
+
 export default function ListaProductos() {
     
     const [products, setProducts] = useState<Product[]>([]); 
@@ -15,17 +13,15 @@ export default function ListaProductos() {
     const [modalOpen, setModalOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    // Función para cargar los productos (útil para recargar la lista después de crear/eliminar)
     const loadProducts = useCallback(() => {
         const storedProducts: Product[] = getAllProducts();
         
-        // --- CÓDIGO DE DEPURACIÓN CLAVE ---
         console.log("-----------------------------------------");
         console.log("Productos Cargados desde LocalStorage/API:");
         console.table(storedProducts); 
         console.log("Total de productos cargados:", storedProducts.length);
         console.log("-----------------------------------------");
-        // --- FIN CÓDIGO DE DEPURACIÓN ---
+
 
         setProducts(storedProducts);
     }, []);
@@ -33,7 +29,7 @@ export default function ListaProductos() {
     // Cargamos los productos al montar el componente
     useEffect(() => {
         loadProducts();
-    }, [loadProducts]); // El dependency array incluye loadProducts
+    }, [loadProducts]); 
 
     const formatPrice = (priceString: string) => { 
         return priceString; 
@@ -115,7 +111,7 @@ export default function ListaProductos() {
                                     {products.map((p) => (
                                         <tr key={p.id}>
                                             <td>{p.id}</td>
-                                            {/* Usamos p.imageUrl y p.name según tu ProductType */}
+                                            {}
                                             <td><img src={p.imageUrl} alt={p.name} className="producto-img" /></td> 
                                             <td>{p.name}</td> 
                                             <td>{p.category}</td>

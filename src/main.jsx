@@ -46,13 +46,13 @@ const router = createBrowserRouter([
   { path: "/categorias", element: <Categorias /> },
 
   // --- NUEVAS RUTAS DE SECCIONES ---
-{ path:"/secciones/juegosdemesa", element: <CategorySection />}, // 🔑 Antes era SeccionJuegosMesa
-{ path: "/secciones/accesorios", element: <CategorySection /> }, // 🔑 Usa el mismo componente
-{ path: "/secciones/consolas", element: <CategorySection /> }, // 🔑 Usa el mismo componente
-{ path: "/secciones/pcdeescritorio", element: <CategorySection /> }, // 🔑 Usa el mismo componente
-{ path: "/secciones/sillasgamers", element: <CategorySection /> }, // 🔑 Usa el mismo componente
-{ path: "/secciones/mousepad", element: <CategorySection /> }, // 🔑 Usa el mismo componente
-{ path: "/secciones/poleraspersonalizadas", element: <CategorySection /> }, // 🔑 Usa el mismo componente
+{ path:"/secciones/juegosdemesa", element: <CategorySection />},
+{ path: "/secciones/accesorios", element: <CategorySection /> },
+{ path: "/secciones/consolas", element: <CategorySection /> }, 
+{ path: "/secciones/pcdeescritorio", element: <CategorySection /> }, 
+{ path: "/secciones/sillasgamers", element: <CategorySection /> }, 
+{ path: "/secciones/mousepad", element: <CategorySection /> }, 
+{ path: "/secciones/poleraspersonalizadas", element: <CategorySection /> }, 
 { path: "/productos/:id", element: <ProductDetailPage /> },
   // --- Páginas de Productos (Próximamente) ---
   { path: "/productos/audifonos", element: <div>Página de Audífonos (Próximamente)</div> },
@@ -81,15 +81,13 @@ const router = createBrowserRouter([
     element: <CrearUsuario />,
   },
 
-
-  // --- 5. AÑADIMOS LAS NUEVAS RUTAS DE AUTENTICACIÓN ---
   {
     path: "/login",
     element: <Login />,
   },
   {
     path: "/registrarse",
-    element: <Signup />, // <-- 2. ACTUALIZA ESTA RUTA (NUEVO)
+    element: <Signup />, 
   },
   {
     path: "/restablecer-password",

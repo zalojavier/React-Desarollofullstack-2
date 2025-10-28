@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { CartItem, CartContextType } from '../types/CartTypes';
-// 🔑 Importaciones de API: Asumimos que estas funciones existen.
 import { loadCartFromStorage, saveCartToStorage, calculateTotal } from '../api/cartApi'; 
 import { getProductById } from '../api/productApi'; 
 
@@ -29,22 +28,15 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [items, setItems] = useState<CartItem[]>(() => loadCartFromStorage());
     const [total, setTotal] = useState<number>(0);
 
-    // 🔑 CORRECCIÓN: EFECTO para persistir el carrito (guardar en localStorage)
     useEffect(() => {
         saveCartToStorage(items);
     }, [items]);
 
-    // 🔑 CORRECCIÓN CLAVE: EFECTO para RECALCULAR el total cada vez que 'items' cambia
     useEffect(() => {
-        // Asumiendo que calculateTotal es una función síncrona que calcula:
-        // items.reduce((sum, item) => sum + item.precioUnitario * item.cantidad, 0)
         const newTotal = calculateTotal(items); 
         setTotal(newTotal);
     }, [items]); // Vuelve a ejecutar cada vez que los items cambian
 
-    // --- Funciones de Modificación ---
-
-    // La firma de esta función debe coincidir con CartContextType (product: CartItem)
     const addItem = (product: CartItem) => {
         
         // CHEQUEO DE STOCK

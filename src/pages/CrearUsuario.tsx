@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-// 1. Importamos useNavigate para la redirección programática
 import { useNavigate } from 'react-router-dom'; 
 import SideBarAdmin from '../components/SideBarAdmin';
 import '../styles/crearUsuario.css'; 
@@ -30,10 +29,7 @@ export default function CrearUsuario() {
         });
     };
 
-    /**
-     * Esta función es disparada por el botón type="submit".
-     * Se encarga de guardar el usuario y redirigir si tiene éxito.
-     */
+ 
     const handleSubmit = (e: FormEvent): void => {
         e.preventDefault();
         setMensaje('Creando usuario...');
@@ -46,13 +42,10 @@ export default function CrearUsuario() {
             setMensaje(`¡Usuario ${formData.nombre} creado con éxito! Redirigiendo...`);
             setEsError(false);
             
-            // 🔑 3. Redirección: Navegamos a la lista de usuarios.
-            // Le damos un pequeño tiempo (1000ms) para que el usuario vea el mensaje de éxito.
             setTimeout(() => {
                 navigate('/administrador/usuarios'); 
             }, 1000); 
             
-            // Nota: Aquí no es necesario resetear formData ya que navegaremos a otra página.
         } else {
             setMensaje('Error: El correo o RUT ya están registrados. Inténtalo de nuevo.');
             setEsError(true);

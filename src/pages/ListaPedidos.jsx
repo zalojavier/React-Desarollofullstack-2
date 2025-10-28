@@ -2,14 +2,7 @@ import React, { useState } from 'react';
 import SideBarAdmin from '../components/SideBarAdmin';
 import '../styles/listaPedidos.css';
 
-/**
- * ListaPedidos - página presentacional + pequeña interactividad (filtro + acciones demo)
- * - Reutiliza SideBarAdmin como solicitaste.
- * - Filtro por estado (client-side, visual).
- * - Acciones "Cerrar" y "Anular" que actualizan el estado en memoria (demo).
- *
- * Esta versión está pensada para integrarse en un app React con react-router (SideBarAdmin usa useLocation).
- */
+
 export default function ListaPedidos() {
   const initialOrders = [
     { id: '#1001', fecha: '2025-09-06', cliente: 'Ana Fernández', email: 'ana@mitienda.cl', total: '$1.230.000', estado: 'pendiente' },

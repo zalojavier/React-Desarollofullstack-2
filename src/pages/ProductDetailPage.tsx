@@ -5,11 +5,9 @@ import Footer from '../components/Footer.jsx';
 import { useCart } from '../context/cartContex'; 
 import { getAllProducts } from '../api/productApi'; 
 import type { Product } from '../types/ProductTypes';
-import '../styles/ProductDetailPage.css'; // Importa el archivo CSS para el detalle
+import '../styles/ProductDetailPage.css';
 
-// 🔑 Función de utilidad para formato de moneda (Adaptada de SeccionJuegosMesa.jsx)
 const formatMoney = (n: string | number) => {
-    // Eliminar puntos de miles para que JS no lo interprete como decimal
     const cleanNumberString = String(n).replace(/\./g, ''); 
     const numberValue = Number(cleanNumberString);
 
@@ -22,19 +20,17 @@ const formatMoney = (n: string | number) => {
 };
 
 export default function ProductDetailPage() {
-    // Obtener el ID dinámico de la URL
     const { id } = useParams<{ id: string }>(); 
     const { addItem } = useCart();
     
     const [product, setProduct] = useState<Product | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [quantity, setQuantity] = useState(1); // Controla la cantidad a añadir al carrito
+    const [quantity, setQuantity] = useState(1); 
 
     // Cargar el producto específico
     useEffect(() => {
         setIsLoading(true);
         try {
-            // Busca todos los productos y luego encuentra el que coincide con el ID de la URL
             const allProducts = getAllProducts(); 
             const foundProduct = allProducts.find(p => String(p.id) === id); 
             setProduct(foundProduct || null);
@@ -54,7 +50,6 @@ export default function ProductDetailPage() {
     const handleAddToCart = () => {
         if (!product || quantity <= 0) return;
 
-        // 🔑 CORRECCIÓN: Limpieza robusta para evitar NaN en el carrito
         const priceCleanString = String(product.price).replace(/\D/g, '');
         const priceAsNumber = Number(priceCleanString);
         
@@ -67,8 +62,8 @@ export default function ProductDetailPage() {
         addItem({
             id: String(product.id),
             nombre: product.name,
-            precioUnitario: priceAsNumber, // Usamos el precio ya limpio
-            cantidad: quantity, // Usamos la cantidad seleccionada por el usuario
+            precioUnitario: priceAsNumber, 
+            cantidad: quantity, 
         });
         alert(`Se añadieron ${quantity} de ${product.name} al carrito.`);
     };
@@ -91,7 +86,6 @@ export default function ProductDetailPage() {
         );
     }
     
-    // Suponiendo que el tipo Product tiene una propiedad 'description'
     const productDescription = (product as any).description || 'Este producto no tiene una descripción detallada disponible.';
     const isOutOfStock = product.stock <= 0;
 

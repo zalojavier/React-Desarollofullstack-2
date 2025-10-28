@@ -5,21 +5,16 @@ import '../styles/CrearProducto.css';
 import { createProduct } from '../api/productApi';
 import type { ProductForm } from '../types/ProductTypes'; 
 
-// Tipos de elementos que pueden cambiar
+
 type InputElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
-/**
- * Función auxiliar para parsear y aplicar la lógica de redondeo a números.
- * Esto asegura que el precio sea un múltiplo de 50.
- */
+
 const parseAndValidateNumber = (value: string, name: string): number => {
-    // 1. Si el valor es una cadena vacía o inválida, retornamos 0
     if (value === "") return 0;
     
     let numValue = parseInt(value, 10);
     if (isNaN(numValue)) return 0;
 
-    // 2. Lógica de redondeo para el precio (múltiplo de 50)
     if (name === 'price') {
         const step = 50; 
         numValue = Math.round(numValue / step) * step; 
@@ -43,16 +38,12 @@ export default function CrearProducto() {
     const [mensaje, setMensaje] = useState('');
     const [esError, setEsError] = useState(false);
 
-    /**
-     * Maneja los cambios en todos los campos del formulario.
-     */
     const handleChange = (e: ChangeEvent<InputElement>): void => {
         const { name, value, type } = e.target;
         
         let finalValue: string | number;
 
         if (type === 'number') {
-            // Guardamos el valor exacto del input (que puede ser string o number)
             finalValue = value; 
         } else if (name === 'stock') {
              // Si fuera un campo de stock tipo string
@@ -67,28 +58,22 @@ export default function CrearProducto() {
         }));
     };
 
-    /**
-     * Maneja el envío del formulario: guarda el producto en localStorage y redirige.
-     */
+
     const handleSubmit = (e: FormEvent): void => {
         e.preventDefault();
         setMensaje('Guardando producto...');
         setEsError(false);
         
-        // 1. Determinar la URL final (con placeholder si está vacía)
         const finalImageUrl = formData.imageUrl || '/imagenesreact/placeholder_product.jpg';
         
-        // 2. Preparar los datos para la API (asegurando los tipos correctos)
         const productToSave: ProductForm = {
             ...formData,
-            // Convertimos el precio de vuelta a string y aplicamos la validación final (redondeo)
             price: String(parseAndValidateNumber(String(formData.price), 'price')), 
             // Aseguramos que el stock sea number
             stock: Number(formData.stock), 
             imageUrl: finalImageUrl, 
         };
 
-        // 3. Llamar a la API para crear el producto
         const success = createProduct(productToSave); 
 
         if (success) {
@@ -145,8 +130,8 @@ export default function CrearProducto() {
                     <div className="form-row">
                         <div className="form-group">
                             <label htmlFor="price">Precio ($ CLP)</label>
-                            {/* step="50" obliga al usuario a usar múltiplos de 50 */}
-                            <input type="number" id="price" name="price" className="form-control" value={formData.price} onChange={handleChange} required min="0" step="50" />
+                            {}
+                            <input type="number" id="price" name="price" className="form-control" value={formData.price} onChange={handleChange} required min="0" step="10" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="stock">Stock</label>
@@ -163,7 +148,7 @@ export default function CrearProducto() {
                     
                     <div className="form-row">
                         <div className="form-group form-group-full">
-                            {/* 🔑 Campo de URL de imagen opcional */}
+                            {}
                             <label htmlFor="imageUrl">URL de la Imagen (Opcional)</label>
                             <input 
                                 type="text" 

@@ -1,11 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-/**
- * SideBarAdmin - componente reutilizable para la barra lateral del panel de administración.
- * - No importa los estilos (se importan en la página contenedora).
- * - Usa react-router Link para navegación interna.
- */
 function SideBarAdmin() {
   const location = useLocation();
   const activePath = location.pathname;
@@ -13,7 +8,7 @@ function SideBarAdmin() {
   return (
     <aside className="sidebar-box" role="navigation" aria-label="Menú administrador">
       <div className="sidebar-logo">
-        {/* Si prefieres importar la imagen desde src, puedes reemplazar el src por un import. */}
+        {}
         <img src="/imagenesreact/pixel.png" alt="Logo Admin" />
         <span className="brand-name">Mi Tienda Pc gamer</span>
       </div>
