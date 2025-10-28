@@ -21,13 +21,13 @@ import BlogArmarPc from './pages/BlogArmarPc.jsx';
 import Categorias from './pages/Categorias.jsx';
 import SeccionJuegosMesa from './pages/SeccionJuegosMesa.jsx';
 import CartPage from './pages/Carrito.tsx';
-import HomeAdministrador from './pages/HomeAdministrador.jsx';
-import ListaProductos from './pages/ListaProductos.jsx';
-import ListaUsuarios from './pages/ListaUsuarios.jsx';
-import ListaPedidos from './pages/ListaPedidos.jsx';
+import HomeAdministrador from './pages/HomeAdministrador';
+import ListaProductos from './pages/ListaProductos';
+import ListaUsuarios from './pages/ListaUsuarios';
+import ListaPedidos from './pages/ListaPedidos';
 import CrearUsuario from './pages/CrearUsuario'; // Verifica la extensión (.jsx o .tsx)
 import Login from './pages/Login.jsx';
-import CrearProducto from './pages/CrearProducto.jsx';
+import CrearProducto from './pages/CrearProducto.tsx';
 import Signup from './pages/Signup.jsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
 
 // --- Definición de Rutas (El "Mapa" del sitio) ---
@@ -75,7 +75,7 @@ const router = createBrowserRouter([
   { path: "/administrador/usuarios", element: <ListaUsuarios /> },
   { path: "/administrador/pedidos", element: <ListaPedidos /> },
   {
-    path: "/administrador/crear-producto",
+    path: "/administrador/crear_producto",
     element: <CrearProducto />,
   },
   {
