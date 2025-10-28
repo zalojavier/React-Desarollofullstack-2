@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
-import './BlogArmarPc.css'; // <-- 1. ¡IMPORTAMOS EL CSS NUEVO!
+import '../styles/BlogArmarPc.css'; // <-- 1. ¡IMPORTAMOS EL CSS NUEVO!
 
 function BlogArmarPc() {
   return (

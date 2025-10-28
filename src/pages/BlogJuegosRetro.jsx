@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
-import './BlogJuegosRetro.css'; 
+import '../styles/BlogJuegosRetro.css'; // <-- 1. ¡IMPORTAMOS EL CSS NUEVO!
 
 
 function BlogJuegosRetro() {
