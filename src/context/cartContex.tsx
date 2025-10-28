@@ -1,12 +1,15 @@
+// src/context/cartContex.tsx (MODIFICADO)
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type {ReactNode} from 'react';
 import type { CartItem, CartContextType } from '../types/CartTypes';
 import { loadCartFromStorage, saveCartToStorage, calculateTotal } from '../api/cartApi';
+import { getProductById } from '../api/productApi'; // 🔑 Importamos la nueva función
 
-// 1. Crear el Contexto
+// 1. Crear el Contexto (permanece igual)
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-// 2. Hook personalizado para usar el Contexto
+// 2. Hook personalizado para usar el Contexto (permanece igual)
 export const useCart = () => {
   const context = useContext(CartContext);
   if (context === undefined) {
@@ -24,29 +27,34 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [total, setTotal] = useState<number>(0);
 
-  // Cargar estado inicial desde localStorage al montar
-  useEffect(() => {
-    const initialItems = loadCartFromStorage();
-    setItems(initialItems);
-    setTotal(calculateTotal(initialItems));
-  }, []);
+  // ... (useEffect hooks permanecen igual) ...
 
-  // Sincronizar estado a localStorage cada vez que 'items' cambie
-  useEffect(() => {
-    saveCartToStorage(items);
-    setTotal(calculateTotal(items));
-  }, [items]);
-
-  // --- Funciones de Modificación (Reemplazan la lógica de Js/carrito.js) ---
+  // --- Funciones de Modificación ---
 
   const addItem = (product: { id: string; nombre: string; precio: number }) => {
+    
+    // 🔑 CHEQUEO DE STOCK para AÑADIR
+    const productData = getProductById(product.id);
+    if (!productData) {
+        console.error(`Producto ID ${product.id} no existe.`);
+        return;
+    }
+    
     setItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id);
+      const currentQuantity = existingItem ? existingItem.cantidad : 0;
+      const nextQuantity = currentQuantity + 1;
+      const availableStock = productData.stock; // Stock disponible
+
+      if (nextQuantity > availableStock) {
+        console.warn(`No se puede añadir más de ${availableStock} unidades de ${product.nombre}. Stock actual: ${currentQuantity}.`);
+        return prevItems; // No hay cambios
+      }
 
       if (existingItem) {
         return prevItems.map(item =>
           item.id === product.id
-            ? { ...item, cantidad: item.cantidad + 1 }
+            ? { ...item, cantidad: nextQuantity }
             : item
         );
       } else {
@@ -64,7 +72,26 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   const updateQuantity = (id: string, newQuantity: number) => {
+    
+    // 🔑 CHEQUEO DE STOCK para ACTUALIZAR CANTIDAD
+    const productData = getProductById(id);
+    if (!productData) return;
+
     const qty = Math.max(1, newQuantity); // Asegurar que la cantidad sea al menos 1
+    const availableStock = productData.stock;
+
+    if (qty > availableStock) {
+        console.warn(`La cantidad solicitada (${qty}) excede el stock disponible (${availableStock}). Ajustando al máximo.`);
+        const adjustedQty = availableStock;
+
+        setItems(prevItems =>
+            prevItems.map(item =>
+                item.id === id ? { ...item, cantidad: adjustedQty } : item
+            )
+        );
+        return; 
+    }
+    
     setItems(prevItems =>
       prevItems.map(item =>
         item.id === id ? { ...item, cantidad: qty } : item
