@@ -1,5 +1,6 @@
 import React from 'react';
 import SideBarAdmin from '../components/SideBarAdmin';
+import { Link } from 'react-router-dom';
 import '../styles/listaUsuarios.css';
 
 /**
@@ -44,13 +45,12 @@ export default function ListaUsuarios() {
           <h1>Usuarios</h1>
 
           <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-            <button
+            <Link
               className="btn-crear-usuario"
-              type="button"
-              onClick={() => { window.location.href = '/administrador/crear_usuario'; }}
+              to="/administrador/crear_usuario" // Usamos 'to' en lugar de 'href'
             >
               <i className="bi bi-person-plus" /> Crear usuario
-            </button>
+            </Link>
           </div>
         </div>
 

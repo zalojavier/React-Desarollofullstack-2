@@ -25,6 +25,8 @@ import HomeAdministrador from './pages/HomeAdministrador.jsx';
 import ListaProductos from './pages/ListaProductos.jsx';
 import ListaUsuarios from './pages/ListaUsuarios.jsx';
 import ListaPedidos from './pages/ListaPedidos.jsx';
+import CrearUsuario from './pages/CrearUsuario';
+ // <-- 1. IMPORTA LA NUEVA PÁGINA
 import Login from './pages/Login.jsx';
 import CrearProducto from './pages/CrearProducto.jsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
 
@@ -89,6 +91,10 @@ const router = createBrowserRouter([
   {
     path: "/restablecer-password",
     element: <div>Página de Restablecer Contraseña (Próximamente)</div>,
+  },
+  {
+    path: "/administrador/crear_usuario",
+    element: <CrearUsuario />,
   },
 ]);
 
