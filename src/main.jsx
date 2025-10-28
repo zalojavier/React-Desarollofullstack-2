@@ -25,10 +25,10 @@ import HomeAdministrador from './pages/HomeAdministrador.jsx';
 import ListaProductos from './pages/ListaProductos.jsx';
 import ListaUsuarios from './pages/ListaUsuarios.jsx';
 import ListaPedidos from './pages/ListaPedidos.jsx';
-import CrearUsuario from './pages/CrearUsuario';
- // <-- 1. IMPORTA LA NUEVA PÁGINA
+import CrearUsuario from './pages/CrearUsuario'; // Verifica la extensión (.jsx o .tsx)
 import Login from './pages/Login.jsx';
-import CrearProducto from './pages/CrearProducto.jsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
+import CrearProducto from './pages/CrearProducto.jsx';
+import Signup from './pages/Signup.jsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
 
 // --- Definición de Rutas (El "Mapa" del sitio) ---
 const router = createBrowserRouter([
@@ -75,9 +75,14 @@ const router = createBrowserRouter([
   { path: "/administrador/usuarios", element: <ListaUsuarios /> },
   { path: "/administrador/pedidos", element: <ListaPedidos /> },
   {
-    path: "/administrador/crear-producto", // <-- 2. AÑADE LA NUEVA RUTA (NUEVO)
+    path: "/administrador/crear-producto",
     element: <CrearProducto />,
   },
+  {
+    path: "/administrador/crear_usuario",
+    element: <CrearUsuario />,
+  },
+
 
   // --- 5. AÑADIMOS LAS NUEVAS RUTAS DE AUTENTICACIÓN ---
   {
@@ -86,15 +91,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/registrarse",
-    element: <div>Página de Registro (Próximamente)</div>,
+    element: <Signup />, // <-- 2. ACTUALIZA ESTA RUTA (NUEVO)
   },
   {
     path: "/restablecer-password",
     element: <div>Página de Restablecer Contraseña (Próximamente)</div>,
-  },
-  {
-    path: "/administrador/crear_usuario",
-    element: <CrearUsuario />,
   },
 ]);
 
