@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'; // 1. Importamos 'useEffect'
 import { Link } from 'react-router-dom';
-import './Login.css'; 
+import '../styles/Login.css'; // Asegúrate de tener los estilos adecuados
 
 function Login() {
 

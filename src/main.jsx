@@ -28,7 +28,7 @@ import ListaPedidos from './pages/ListaPedidos';
 import CrearUsuario from './pages/CrearUsuario'; // Verifica la extensión (.jsx o .tsx)
 import Login from './pages/Login.jsx';
 import CrearProducto from './pages/CrearProducto.tsx';
-import Signup from './pages/Signup.jsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
+import Signup from './pages/Signup.tsx'; // <-- 1. IMPORTA LA NUEVA PÁGINA (NUEVO)
 
 // --- Definición de Rutas (El "Mapa" del sitio) ---
 const router = createBrowserRouter([
