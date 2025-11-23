@@ -274,15 +274,38 @@ button.btn-success:hover {
   color: white;
 }
 
-/* --- ESTILOS NUEVOS EXTRAÍDOS DEL HTML --- */
+/* --- Ajustes del Navbar --- */
 
-/* Para la imagen del logo en el Navbar */
 .navbar-logo-img {
-  height: 170px;
-  margin-right: 83px;
+  height: 65px; /* Tamaño más grande y visible */
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(3, 255, 226, 0.4)); /* Un brillo gamer sutil */
+  transition: transform 0.3s ease;
 }
 
-/* Para el texto "Sobre Nosotros" en el Footer */
-.footer-about-text {
-  text-align: justify;
+.navbar-logo-img:hover {
+  transform: scale(1.1) rotate(-2deg); /* Pequeño efecto al pasar el mouse */
+}
+
+/* Botón de login */
+.btn-login {
+  background-color: #222a50;
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid rgba(3, 255, 226, 0.3);
+  padding: 8px 24px; /* Botón más ancho y fácil de clicar */
+  border-radius: 8px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.btn-login:hover {
+  background-color: #03ffe2;
+  color: #000;
+  box-shadow: 0 0 15px rgba(3, 255, 226, 0.6);
 }
