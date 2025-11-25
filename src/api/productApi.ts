@@ -1,130 +1,97 @@
-// src/api/productApi.ts
+// src/api/productApi.ts (Versión INTEGRADA CON BACKEND)
 
-import type { Product, ProductForm } from '../types/ProductTypes'; // Aseguramos las importaciones
+import type { Product, ProductForm } from '../types/ProductTypes'; 
+// Importamos el cliente Axios configurado
+import axiosClient  from './axiosClient';
 
-const PRODUCT_STORAGE_KEY = 'productos';
-
-// Datos iniciales (Se mantienen igual)
-const initialProducts: Product[] = [
-    { id: 1, imageUrl: "catan_url", name: "Catan", category: "Juegos de mesa", price: "29.990", stock: 10, description: "Juego de estrategia y comercio." },
-    { id: 2, imageUrl: "carcassonne_url", name: "Carcassonne", category: "Juegos de mesa", price: "24.990", stock: 5, description: "Juego de colocación de losetas." },
-    { id: 3, imageUrl: "cont_xbox_url", name: "Controlador inalambrico xbox series X", category: "Accesorios", price: "59.990", stock: 20, description: "Controlador oficial para Xbox Series X." },
-    { id: 4, imageUrl: "auri_gam_url", name: "Auriculares Gamer hyperX Cloud II ", category: "Accesorios", price: "79.990", stock: 20, description: "Auriculares con sonido 7.1 y micrófono." },
-    { id: 5, imageUrl: "play5_url", name: "Playstation 5", category: "Consolas", price: "549.990", stock: 8, description: "Consola de última generación." },
-    { id: 6, imageUrl: "pc_gamer_url", name: "PC gamer ASUS ROG STRIX", category: "Computadoras gamers", price: "1299.990", stock: 5, description: "PC con alto rendimiento para juegos." },
-    { id: 7, imageUrl: "silla_gamer_st_url", name: "Silla gamer Secretlab titan", category: "Sillas gamer", price: "349.990", stock: 18, description: "Silla ergonómica de alta calidad." },
-    { id: 8, imageUrl: "mousepad_razer_url", name: "Mousepad Razer goliathus extended chroma", category: "Mousepads", price: "29.990", stock: 30, description: "Alfombrilla extendida con iluminación RGB." },
-    { id: 9, imageUrl: "polera_per_url", name: "Polera gamer personalizada 'level-up'croma", category: "Poleras y polerones personalizados", price: "14.990", stock: 18, description: "Polera con diseño personalizable." },
-];
-
-// ------------------------------------------
-// --- FUNCIONES INTERNAS (NO EXPORTADAS) ---
-// ------------------------------------------
-
-const saveProducts = (products: Product[]): void => {
-    localStorage.setItem(PRODUCT_STORAGE_KEY, JSON.stringify(products));
-};
-
-const getStoredProducts = (): Product[] => {
-    const productsJson = localStorage.getItem(PRODUCT_STORAGE_KEY);
-    if (productsJson) {
-        try {
-            return JSON.parse(productsJson) as Product[];
-        } catch (e) {
-            console.error("Error parsing products from Local Storage:", e);
-            return [];
-        }
-    }
-    return [];
-};
-
-
-// ------------------------------------------
 // --- FUNCIONES DE LA API PÚBLICA (EXPORTADAS) ---
-// ------------------------------------------
 
-export function seedProducts(): void {
-    const productsJson = localStorage.getItem(PRODUCT_STORAGE_KEY);
-    if (!productsJson) {
-        console.log("Seeding initial products...");
-        saveProducts(initialProducts);
+/**
+ * Obtiene todos los productos del backend (Ruta protegida para CLIENTE y ADMIN).
+ * @returns {Promise<Product[]>} La lista de productos.
+ */
+export async function getAllProducts(): Promise<Product[]> {
+    try {
+        // Endpoint: GET /api/products
+        const response = await axiosClient.get('/products');
+        
+        // El backend devuelve los datos en response.data
+        return response.data as Product[];
+        
+    } catch (error) {
+        console.error("Error al obtener productos:", error);
+        
+        // Si el token expira o el rol no tiene acceso, se lanzará una excepción (401/403)
+        // Puedes agregar lógica de manejo de errores aquí (ej. si es 403, redirigir a Home)
+        return [];
     }
 }
 
-export function getAllProducts(): Product[] {
-    return getStoredProducts();
-}
-
-export function getProductCount(): number {
-    const productsArray = getStoredProducts();
-    return productsArray.length;
+/**
+ * Obtiene un solo producto por su ID (Ruta protegida para CLIENTE y ADMIN).
+ */
+export async function getProductById(id: string): Promise<Product | undefined> {
+    try {
+        // Endpoint: GET /api/products/{id}
+        const response = await axiosClient.get(`/products/${id}`);
+        
+        return response.data as Product;
+        
+    } catch (error) {
+        console.error(`Error al obtener producto con ID ${id}:`, error);
+        return undefined;
+    }
+    
 }
 
 /**
- * Obtiene un producto por su ID (usado por el carrito para validar stock).
+ * Crea un nuevo producto (Ruta protegida, requiere rol ADMINISTRADOR).
  */
-export function getProductById(id: string): Product | undefined {
-    const products = getAllProducts();
-    const idAsNumber = parseInt(id, 10);
-    // Buscamos el producto por el ID numérico
-    return products.find(p => p.id === idAsNumber); 
-}
-
-/**
- * 🔑 FUNCIÓN 1 CORREGIDA: Crea un nuevo producto y lo guarda en localStorage.
- */
-export const createProduct = (formData: ProductForm): boolean => { 
-    const products = getAllProducts(); 
-
-    // Validaciones de unicidad (ej. por nombre)
-    if (products.some(p => p.name.toLowerCase() === formData.name.toLowerCase())) {
+export async function createProduct(formData: ProductForm): Promise<boolean> { 
+    try {
+        // Endpoint: POST /api/products
+        await axiosClient.post('/products', formData);
+        
+        return true; 
+        
+    } catch (error) {
+        console.error("Error al crear producto:", (error as any).response?.data || error);
+        // El backend maneja la validación de unicidad (nombre duplicado) y devuelve 400
         return false; 
     }
-
-    // LÓGICA DE AUTOINCREMENTO: Encontrar el ID numérico más alto.
-    const maxId = products.reduce((max: number, product: Product) => { 
-        const productIdAsNumber = Number(product.id); 
-        return isNaN(productIdAsNumber) ? max : Math.max(max, productIdAsNumber);
-    }, 0); 
-    
-    const newId = maxId + 1; // ID es number
-    
-    const newProduct: Product = {
-        ...formData,
-        id: newId, 
-    };
-
-    products.push(newProduct);
-    saveProducts(products); 
-    
-    return true; 
-};
-
+}
 
 /**
- * 🔑 FUNCIÓN 2 CORREGIDA: Actualiza el stock de un producto después de una compra.
  */
-export function updateProductStock(id: string, quantitySold: number): boolean {
-    const products = getAllProducts();
-    const idAsNumber = parseInt(id, 10);
-    
-    const productIndex = products.findIndex(p => p.id === idAsNumber);
-
-    if (productIndex === -1) {
-        console.error(`Producto con ID ${id} no encontrado.`);
+export async function updateProductStock(id: string, quantitySold: number): Promise<boolean> {
+    try {
+        // Endpoint: PUT /api/products/decrease-stock/{id}
+        // El body debe ser un JSON con la cantidad a disminuir: {"quantity": 5}
+        await axiosClient.put(`/products/decrease-stock/${id}`, { quantity: quantitySold });
+        
+        return true; 
+    } catch (error) {
+        console.error("Error al actualizar stock:", (error as any).response?.data || error);
+        // Maneja errores de stock insuficiente (lanza RuntimeException en el backend)
         return false;
     }
-
-    const currentStock = products[productIndex].stock;
-    const newStock = currentStock - quantitySold;
-
-    if (newStock < 0) {
-        console.warn(`Error de stock: Venta de ${quantitySold} excede el stock actual de ${currentStock} para el producto ${id}.`);
-        return false;
-    }
-
-    products[productIndex].stock = newStock;
-    saveProducts(products); 
-
-    return true;
 }
+export const getProductCount = async (): Promise<number> => {
+    try {
+        // Hacemos la petición al endpoint que trae los productos
+        const response = await axiosClient.get('/products');
+        
+        // Verificamos que sea un array y retornamos su longitud
+        if (Array.isArray(response.data)) {
+            return response.data.length;
+        }
+        
+        return 0; // Si no es un array, asumimos que hay 0
+    } catch (error) {
+        console.error("Error al obtener el conteo de productos:", error);
+        return 0; // En caso de error, retornamos 0 para no romper la interfaz
+    }
+};
+// Funciones obsoletas que ya no se usan con el backend:
+// export function seedProducts(): void { /* Ya no es necesario sembrar desde el frontend */ }
+// export function getProductCount(): number { /* Haz una llamada API si necesitas el conteo */ return 0; }

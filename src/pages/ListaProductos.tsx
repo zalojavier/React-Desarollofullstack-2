@@ -1,45 +1,67 @@
-import React, { useState, useEffect, useCallback } from 'react'; // Agregamos useCallback
-import { Link } from 'react-router-dom'; 
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; 
 import SideBarAdmin from '../components/SideBarAdmin';
 import '../styles/listaProductos.css';
-import { getAllProducts } from '../api/productApi';
+
+import { getAllProducts } from '../api/productApi'; 
 import type { Product } from '../types/ProductTypes'; 
 
 
 export default function ListaProductos() {
+    // useNavigate es útil para redirigir si el token expira
+    const navigate = useNavigate();
     
     const [products, setProducts] = useState<Product[]>([]); 
     const [view, setView] = useState('tabla');
     const [modalOpen, setModalOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    // const [isLoading, setIsLoading] = useState(true); // Puedes añadir este estado si quieres mostrar un spinner
 
-    const loadProducts = useCallback(() => {
-        const storedProducts: Product[] = getAllProducts();
-        
-        console.log("-----------------------------------------");
-        console.log("Productos Cargados desde LocalStorage/API:");
-        console.table(storedProducts); 
-        console.log("Total de productos cargados:", storedProducts.length);
-        console.log("-----------------------------------------");
+    // 1. FUNCIÓN DE CARGA: Define la lógica de llamada al backend
+    const loadProducts = useCallback(async () => {
+        // setIsLoading(true); // Iniciar carga
 
+        try {
+            // USAMOS await para esperar la respuesta del backend
+            const storedProducts: Product[] = await getAllProducts(); 
+            
+            console.log("-----------------------------------------");
+            console.log("Productos Cargados desde el Backend:");
+            console.table(storedProducts); 
+            console.log("Total de productos cargados:", storedProducts.length);
+            console.log("-----------------------------------------");
 
-        setProducts(storedProducts);
-    }, []);
+            setProducts(storedProducts);
+        } catch (error: any) {
+            console.error("Error al cargar los productos en la vista:", error);
+            
+            // Si el backend devuelve un error de autenticación (401/403)
+            if (error.response?.status === 401 || error.response?.status === 403) {
+                 // Limpiar token y redirigir al login (Práctica de seguridad)
+                 localStorage.removeItem('jwt_token');
+                 navigate('/login');
+            }
+        } // finally { setIsLoading(false); }
+    }, [navigate]); // navigate se incluye como dependencia
 
-    // Cargamos los productos al montar el componente
+    // 2. EFECTO: Llama a la función de carga al montar el componente
     useEffect(() => {
         loadProducts();
-    }, [loadProducts]); 
+    }, [loadProducts]); // Se ejecuta solo al inicio (o cuando loadProducts cambie)
 
     const formatPrice = (priceString: string) => { 
+        // Lógica de formato de precio (ej. agregar puntos o símbolo CLP)
+        // Por ahora lo dejamos simple ya que tu Product.price es un string con formato (ej. "29.990")
         return priceString; 
     };
+
+    // Puedes añadir un spinner si isLoading es true
 
     return (
         <div className="admin-layout">
             <SideBarAdmin />
-
             <main className="main-content">
+                {/* ... (El resto del componente permanece igual) ... */}
                 <div className="productos-header">
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                         <h1>Productos</h1>
@@ -65,9 +87,6 @@ export default function ListaProductos() {
                     </div>
 
                     <div className="create-area" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    
-
-                        {/* Botón crear producto con dropdown */}
                         <div className="create-wrapper">
                             <Link
                                 className="btn-crear-producto"
@@ -111,8 +130,13 @@ export default function ListaProductos() {
                                     {products.map((p) => (
                                         <tr key={p.id}>
                                             <td>{p.id}</td>
-                                            {}
-                                            <td><img src={p.imageUrl} alt={p.name} className="producto-img" /></td> 
+                                            <td>
+                                                <img 
+                                                    src={p.imageUrl || 'https://via.placeholder.com/50'} 
+                                                    alt={p.name} 
+                                                    className="producto-img" 
+                                                />
+                                            </td> 
                                             <td>{p.name}</td> 
                                             <td>{p.category}</td>
                                             <td>{formatPrice(p.price)}</td>
@@ -127,18 +151,24 @@ export default function ListaProductos() {
                                 </tbody>
                             </table>
                             {products.length === 0 && (
-                                <p style={{ textAlign: 'center', padding: '20px' }}>No hay productos registrados.</p>
+                                <p style={{ textAlign: 'center', padding: '20px' }}>
+                                    {/* Mostrar un mensaje más adecuado si la lista está vacía */}
+                                    No hay productos registrados o error al cargar.
+                                </p>
                             )}
                         </div>
                     )}
 
-                    {/* VISTA: TABLERO / CARDS */}
+                    {/* VISTA: TABLERO / CARDS (similar a la tabla) */}
                     {view === 'tablero' && (
                         <div className="product-board" style={{ padding: 18 }}>
                             {products.map((p) => (
                                 <article className="product-card" key={p.id}>
                                     <div className="product-card-media">
-                                        <img src={p.imageUrl} alt={p.name} /> 
+                                        <img 
+                                            src={p.imageUrl || 'https://via.placeholder.com/150'} 
+                                            alt={p.name} 
+                                        /> 
                                     </div>
                                     <div className="product-card-body">
                                         <h3 className="product-card-title">{p.name}</h3>
@@ -155,7 +185,7 @@ export default function ListaProductos() {
                                 </article>
                             ))}
                             {products.length === 0 && (
-                                <p style={{ textAlign: 'center', padding: '20px', width: '100%' }}>No hay productos registrados.</p>
+                                <p style={{ textAlign: 'center', padding: '20px', width: '100%' }}>No hay productos registrados o error al cargar.</p>
                             )}
                         </div>
                     )}

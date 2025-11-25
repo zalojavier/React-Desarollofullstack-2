@@ -6,10 +6,17 @@ export default defineConfig({
   plugins: [react()],
 
   server: {
-    port: 3000, // Cambia este número por el puerto que desees (ej. 4000, 8080)
+    port: 3000, 
+    // 👇 AQUÍ ESTÁ LA INTEGRACIÓN DEL PROXY
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000', // Tu Backend Spring Boot
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   },
   // ---------------------------------------------
-
   
   test: {
     globals: true,
