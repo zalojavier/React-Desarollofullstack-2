@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 import { useCart } from '../context/cartContex'; 
-import { getAllProducts } from '../api/productApi'; 
+import { getProductById } from '../api/productApi'; // CORRECCIÓN: Usamos la función específica
 import type { Product } from '../types/ProductTypes';
 import '../styles/ProductDetailPage.css';
 
@@ -11,7 +11,6 @@ const formatMoney = (n: string | number) => {
     const cleanNumberString = String(n).replace(/\./g, ''); 
     const numberValue = Number(cleanNumberString);
 
-    // Aplicar el formato de moneda chileno sin decimales
     return new Intl.NumberFormat('es-CL', { 
         style: 'currency', 
         currency: 'CLP', 
@@ -29,21 +28,29 @@ export default function ProductDetailPage() {
 
     // Cargar el producto específico
     useEffect(() => {
-        setIsLoading(true);
-        try {
-            const allProducts = getAllProducts(); 
-            const foundProduct = allProducts.find(p => String(p.id) === id); 
-            setProduct(foundProduct || null);
-            // Si el producto se encuentra, asegura que la cantidad inicial sea 1 (o menor si el stock es 0)
-            if (foundProduct) {
-                setQuantity(foundProduct.stock > 0 ? 1 : 0);
+        const fetchProduct = async () => {
+            if (!id) return;
+            
+            setIsLoading(true);
+            try {
+                // CORRECCIÓN: Llamada asíncrona directa por ID
+                const foundProduct = await getProductById(id);
+                
+                setProduct(foundProduct || null);
+                
+                // Si el producto se encuentra, ajustamos la cantidad inicial
+                if (foundProduct) {
+                    setQuantity(foundProduct.stock > 0 ? 1 : 0);
+                }
+            } catch (error) {
+                console.error("Error al cargar el producto:", error);
+                setProduct(null);
+            } finally {
+                setIsLoading(false);
             }
-        } catch (error) {
-            console.error("Error al cargar el producto:", error);
-            setProduct(null);
-        } finally {
-            setIsLoading(false);
-        }
+        };
+
+        fetchProduct();
     }, [id]);
 
     // Manejar el botón de añadir al carrito
@@ -55,7 +62,7 @@ export default function ProductDetailPage() {
         
         if (isNaN(priceAsNumber)) {
             console.error("Error de conversión de precio:", product.price);
-            alert("Error al añadir al carrito: El precio del producto no es válido. Revisa la consola.");
+            alert("Error al añadir al carrito: El precio del producto no es válido.");
             return;
         }
         
@@ -78,7 +85,7 @@ export default function ProductDetailPage() {
                 <Navbar />
                 <div className="container my-5 text-center">
                     <h2>Producto No Encontrado</h2>
-                    <p>El producto con ID **{id}** no existe o no está disponible.</p>
+                    <p>El producto con ID <strong>{id}</strong> no existe o no está disponible.</p>
                     <Link to="/categorias" className="btn btn-secondary mt-3">Volver al Catálogo</Link>
                 </div>
                 <Footer />
@@ -86,7 +93,8 @@ export default function ProductDetailPage() {
         );
     }
     
-    const productDescription = (product as any).description || 'Este producto no tiene una descripción detallada disponible.';
+    // Protección: Aseguramos que description tenga un valor por defecto si viene vacía
+    const productDescription = product.description || 'Descripción no disponible en este momento.';
     const isOutOfStock = product.stock <= 0;
 
     return (
@@ -98,7 +106,7 @@ export default function ProductDetailPage() {
                     {/* Sección de Imagen */}
                     <div className="col-lg-6 mb-4">
                         <img 
-                            src={product.imageUrl} 
+                            src={product.imageUrl || 'https://via.placeholder.com/400'} 
                             alt={product.name} 
                             className="img-fluid rounded shadow-sm product-image"
                         />
@@ -110,7 +118,7 @@ export default function ProductDetailPage() {
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><Link to="/categorias">Catálogo</Link></li>
-                                <li className="breadcrumb-item active" aria-current="page">{product.category}</li>
+                                <li className="breadcrumb-item active" aria-current="page">{product.category || 'Producto'}</li>
                             </ol>
                         </nav>
                         
@@ -146,7 +154,6 @@ export default function ProductDetailPage() {
                                 max={product.stock}
                                 value={quantity}
                                 onChange={(e) => {
-                                    // Limita la cantidad entre 1 y el stock disponible
                                     const val = Math.max(1, Math.min(product.stock, Number(e.target.value)));
                                     setQuantity(val);
                                 }}
@@ -163,7 +170,8 @@ export default function ProductDetailPage() {
                             </button>
                         </div>
                         
-                        <Link to={`/secciones/${product.category.toLowerCase().replace(/\s+/g, '')}`} className="text-secondary">← Volver a {product.category}</Link>
+                        {/* Botón volver seguro */}
+                        <Link to="/categorias" className="text-secondary">← Volver al catálogo</Link>
                     </div>
                 </div>
             </div>

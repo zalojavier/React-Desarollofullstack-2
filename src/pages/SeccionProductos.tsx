@@ -40,7 +40,6 @@ export default function CategorySection() {
     const categoryName = categoryInfo ? categoryInfo.name : 'Productos';
     const categoryIcon = categoryInfo ? categoryInfo.icon : 'bi-tags';
 
-    // --- CORRECCIÓN PRINCIPAL AQUÍ ---
     useEffect(() => {
         const fetchProducts = async () => {
             setIsLoading(true);
@@ -57,16 +56,21 @@ export default function CategorySection() {
 
         fetchProducts();
     }, []);
-    // ----------------------------------
 
-    // FILTRO: Filtra productos por categoría
+    // --- CORRECCIÓN AQUÍ: FILTRO A PRUEBA DE ERRORES ---
     const filteredProducts = useMemo(() => {
         if (!categoryName || categoryName === 'Productos') return products;
 
         const targetCategoryLower = categoryName.toLowerCase(); 
 
-        return products.filter(p => p.category.toLowerCase() === targetCategoryLower);
+        return products.filter(p => {
+            // PROTECCIÓN: Si p.category es undefined, usamos '' para que no falle el toLowerCase()
+            const productCat = p.category ? p.category.toLowerCase() : '';
+            
+            return productCat === targetCategoryLower || productCat.includes(targetCategoryLower);
+        });
     }, [products, categoryName]);
+    // --------------------------------------------------
 
     // Función para añadir al carrito
     const handleAddToCart = (product: Product) => {
@@ -106,11 +110,12 @@ export default function CategorySection() {
                         {filteredProducts.map(p => (
                             <div className="col-md-6 col-lg-4" key={p.id}>
                                 <div className="card h-100 text-center">
+                                    {/* Protección extra para la imagen */}
                                     <img src={p.imageUrl || 'https://via.placeholder.com/150'} className="card-img-top" alt={p.name} />
                                     <div className="card-body">
                                         <h5 className="card-title">{p.name}</h5>
                                         <div style={{minHeight: '3em'}}>
-                                            {/* Espacio para descripción corta */}
+                                            {/* Espacio para descripción corta si existiera */}
                                         </div>
                                         <div>
                                             <span className="precio">{formatMoney(p.price)}</span>

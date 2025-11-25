@@ -1,9 +1,8 @@
 // src/api/axiosClient.ts
-
 import axios, { AxiosInstance } from 'axios';
 
-
-const API_URL = '/api';
+// URL de tu Backend Spring Boot
+const API_URL = 'http://localhost:8080/api';
 
 const axiosClient: AxiosInstance = axios.create({
     baseURL: API_URL,
@@ -12,14 +11,10 @@ const axiosClient: AxiosInstance = axios.create({
     },
 });
 
-// INTERCEPTOR: Se ejecuta antes de enviar cada petición
+// INTERCEPTOR: Adjuntar token si existe
 axiosClient.interceptors.request.use((config) => {
-    // 1. Obtiene el token guardado durante el login
     const token = localStorage.getItem('jwt_token'); 
-
-    // 2. Si hay token, lo adjunta en el encabezado 'Authorization'
     if (token) {
-        // Formato requerido por Spring Security: Bearer <TOKEN>
         config.headers.Authorization = `Bearer ${token}`; 
     }
     return config;

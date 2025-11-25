@@ -5,9 +5,7 @@ import '../styles/CrearProducto.css';
 import { createProduct } from '../api/productApi';
 import type { ProductForm } from '../types/ProductTypes'; 
 
-
 type InputElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-
 
 const parseAndValidateNumber = (value: string, name: string): number => {
     if (value === "") return 0;
@@ -58,8 +56,8 @@ export default function CrearProducto() {
         }));
     };
 
-
-    const handleSubmit = (e: FormEvent): void => {
+    // CORRECCIÓN: handleSubmit ahora es async
+    const handleSubmit = async (e: FormEvent): Promise<void> => {
         e.preventDefault();
         setMensaje('Guardando producto...');
         setEsError(false);
@@ -74,19 +72,26 @@ export default function CrearProducto() {
             imageUrl: finalImageUrl, 
         };
 
-        const success = createProduct(productToSave); 
+        try {
+            // CORRECCIÓN: Usamos await para esperar la respuesta del backend
+            const success = await createProduct(productToSave); 
 
-        if (success) {
-            setMensaje(`¡Producto "${formData.name}" creado con éxito! Redirigiendo...`);
-            setEsError(false);
-            
-            // 4. Redirección al listado de productos después de un breve delay
-            setTimeout(() => {
-                navigate('/administrador/productos'); 
-            }, 1000); 
-            
-        } else {
-            setMensaje('Error: No se pudo crear el producto. Asegúrate de que el nombre sea único.');
+            if (success) {
+                setMensaje(`¡Producto "${formData.name}" creado con éxito! Redirigiendo...`);
+                setEsError(false);
+                
+                // Redirección al listado de productos después de un breve delay
+                setTimeout(() => {
+                    navigate('/administrador/productos'); 
+                }, 1000); 
+                
+            } else {
+                setMensaje('Error: No se pudo crear el producto. Asegúrate de que el nombre sea único.');
+                setEsError(true);
+            }
+        } catch (error) {
+            console.error("Error en la creación del producto:", error);
+            setMensaje('Error inesperado al conectar con el servidor.');
             setEsError(true);
         }
     };
@@ -123,6 +128,10 @@ export default function CrearProducto() {
                                 <option value="Almacenamiento">Almacenamiento</option>
                                 <option value="Accesorios">Accesorios</option>
                                 <option value="Juegos de mesa">Juegos de mesa</option>
+                                <option value="Consolas">Consolas</option>
+                                <option value="Sillas gamer">Sillas gamer</option>
+                                <option value="Mousepads">Mousepads</option>
+                                <option value="Poleras y polerones personalizados">Poleras y polerones personalizados</option>
                             </select>
                         </div>
                     </div>
@@ -130,7 +139,6 @@ export default function CrearProducto() {
                     <div className="form-row">
                         <div className="form-group">
                             <label htmlFor="price">Precio ($ CLP)</label>
-                            {}
                             <input type="number" id="price" name="price" className="form-control" value={formData.price} onChange={handleChange} required min="0" step="10" />
                         </div>
                         <div className="form-group">
@@ -148,7 +156,6 @@ export default function CrearProducto() {
                     
                     <div className="form-row">
                         <div className="form-group form-group-full">
-                            {}
                             <label htmlFor="imageUrl">URL de la Imagen (Opcional)</label>
                             <input 
                                 type="text" 
